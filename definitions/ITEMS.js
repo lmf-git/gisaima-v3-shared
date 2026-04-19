@@ -45,7 +45,9 @@ export const ITEMS = {
     type: 'weapon',
     rarity: 'common',
     description: 'A basic wooden sword. Not very durable but better than nothing.',
-    power: 2, // Battle power contribution
+    power: 2,
+    equipSlot: 'weapon',
+    stats: { attack: 2 },
     recipe: {
       materials: {
         WOODEN_STICKS: 5
@@ -61,7 +63,9 @@ export const ITEMS = {
     type: 'weapon',
     rarity: 'common',
     description: 'A stone-bladed sword. More durable than wood.',
-    power: 5, // Battle power contribution
+    power: 5,
+    equipSlot: 'weapon',
+    stats: { attack: 5 },
     recipe: {
       materials: {
         WOODEN_STICKS: 2,
@@ -251,7 +255,9 @@ export const ITEMS = {
     type: 'weapon',
     rarity: 'uncommon',
     description: 'A well-crafted iron sword. Standard issue for many fighters.',
-    power: 10, // Battle power contribution
+    power: 10,
+    equipSlot: 'weapon',
+    stats: { attack: 10 },
     recipe: {
       materials: {
         WOODEN_STICKS: 2,
@@ -439,7 +445,9 @@ export const ITEMS = {
     type: 'weapon',
     rarity: 'common',
     description: 'A simple weapon dropped by a monster',
-    power: 3, // Battle power contribution
+    power: 3,
+    equipSlot: 'weapon',
+    stats: { attack: 3 },
     monsterDrop: true
   },
   MONSTER_HIDE: {
@@ -603,7 +611,128 @@ export const ITEMS = {
     type: 'artifact',
     rarity: 'legendary',
     description: 'A strange object that seems to defy the natural laws',
-    biomes: []  // Can be found in any anomalous terrain
+    biomes: []
+  },
+
+  // Equipment — armor & accessories
+  LEATHER_CAP: {
+    name: 'Leather Cap',
+    type: 'armor',
+    rarity: 'common',
+    description: 'A simple leather cap offering minimal head protection.',
+    power: 1,
+    equipSlot: 'helmet',
+    stats: { defense: 1 },
+    recipe: { materials: { LEATHER: 3 }, ticksRequired: 6, category: 'armor', requiredLevel: 1 }
+  },
+  LEATHER_BODY: {
+    name: 'Leather Body',
+    type: 'armor',
+    rarity: 'common',
+    description: 'Stitched leather torso armour.',
+    power: 2,
+    equipSlot: 'torso',
+    stats: { defense: 2 },
+    recipe: { materials: { LEATHER: 6 }, ticksRequired: 8, category: 'armor', requiredLevel: 1 }
+  },
+  LEATHER_LEGS: {
+    name: 'Leather Legs',
+    type: 'armor',
+    rarity: 'common',
+    description: 'Leather leggings providing basic protection.',
+    power: 1,
+    equipSlot: 'legs',
+    stats: { defense: 1 },
+    recipe: { materials: { LEATHER: 4 }, ticksRequired: 6, category: 'armor', requiredLevel: 1 }
+  },
+  LEATHER_BOOTS: {
+    name: 'Leather Boots',
+    type: 'armor',
+    rarity: 'common',
+    description: 'Sturdy leather boots.',
+    power: 1,
+    equipSlot: 'boots',
+    stats: { defense: 1, speed: 1 },
+    recipe: { materials: { LEATHER: 3 }, ticksRequired: 5, category: 'armor', requiredLevel: 1 }
+  },
+  LEATHER_GLOVES: {
+    name: 'Leather Gloves',
+    type: 'armor',
+    rarity: 'common',
+    description: 'Leather gloves that protect the hands.',
+    power: 1,
+    equipSlot: 'bracelet',
+    stats: { defense: 1 },
+    recipe: { materials: { LEATHER: 2 }, ticksRequired: 4, category: 'armor', requiredLevel: 1 }
+  },
+  WOODEN_SHIELD: {
+    name: 'Wooden Shield',
+    type: 'armor',
+    rarity: 'common',
+    description: 'A round wooden shield — crude but better than nothing.',
+    power: 3,
+    equipSlot: 'shield',
+    stats: { defense: 3 },
+    recipe: { materials: { WOODEN_STICKS: 8 }, ticksRequired: 8, category: 'armor', requiredLevel: 1 }
+  },
+  IRON_HELMET: {
+    name: 'Iron Helmet',
+    type: 'armor',
+    rarity: 'uncommon',
+    description: 'A solid iron helmet forged at the smithy.',
+    power: 4,
+    equipSlot: 'helmet',
+    stats: { defense: 4 },
+    recipe: {
+      materials: { IRON_ORE: 4, WOODEN_STICKS: 1 }, ticksRequired: 14, category: 'armor',
+      requiredLevel: 2, requiredBuilding: { type: 'smithy', level: 1 }
+    }
+  },
+  IRON_BODY: {
+    name: 'Iron Body',
+    type: 'armor',
+    rarity: 'uncommon',
+    description: 'Full iron chest plate hammered from ore.',
+    power: 6,
+    equipSlot: 'torso',
+    stats: { defense: 6 },
+    recipe: {
+      materials: { IRON_ORE: 8 }, ticksRequired: 20, category: 'armor',
+      requiredLevel: 3, requiredBuilding: { type: 'smithy', level: 2 }
+    }
+  },
+  IRON_SHIELD: {
+    name: 'Iron Shield',
+    type: 'armor',
+    rarity: 'uncommon',
+    description: 'A heavy iron kite shield.',
+    power: 7,
+    equipSlot: 'shield',
+    stats: { defense: 7 },
+    recipe: {
+      materials: { IRON_ORE: 5 }, ticksRequired: 14, category: 'armor',
+      requiredLevel: 2, requiredBuilding: { type: 'smithy', level: 1 }
+    }
+  },
+  BONE_AMULET: {
+    name: 'Bone Amulet',
+    type: 'accessory',
+    rarity: 'uncommon',
+    description: 'An amulet carved from monster bone, granting minor power.',
+    power: 3,
+    equipSlot: 'amulet',
+    stats: { attack: 1, defense: 1 },
+    recipe: { materials: { BONE_FRAGMENT: 5 }, ticksRequired: 8, category: 'accessory', requiredLevel: 2 }
+  },
+  MONSTER_HIDE_CAPE: {
+    name: 'Monster Hide Cape',
+    type: 'armor',
+    rarity: 'uncommon',
+    description: 'A rough cape stitched from monster hide.',
+    power: 2,
+    equipSlot: 'back',
+    stats: { defense: 2 },
+    recipe: { materials: { MONSTER_HIDE: 3 }, ticksRequired: 8, category: 'armor', requiredLevel: 2 }
   }
 };
 

@@ -71,13 +71,20 @@ function calculateUnitPower(group) {
       }
       
       power += unitPower;
-    
+
     // Add power from unit's level if available
     if (unit.level) {
       power += unit.level;
     }
+
+    // Add power from equipped items
+    if (unit.equipment) {
+      for (const itemCode of Object.values(unit.equipment)) {
+        if (itemCode) power += getItemPower(itemCode);
+      }
+    }
   }
-  
+
   return power;
 }
 
