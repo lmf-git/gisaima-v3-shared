@@ -34,58 +34,87 @@ import { getItemPower } from "../definitions/ITEMS.js";
  * depth of PvP engagements, rewarding player skill and creating decisive outcomes.
  */
 
-// Calculate power for an individual group
-export function calculateGroupPower(group) {
-  if (!group) return 0;
-  
-  // Base power from units
-  const unitPower = calculateUnitPower(group);
-  
-  // Additional power from items
-  const itemPower = calculateItemPower(group);
-  
-  // Total group power is sum of unit power and item power
-  return unitPower + itemPower;
-}
-
-// Calculate power from units only
-function calculateUnitPower(group) {
-  if (!group || !group.units) return 0;
-  
-  const units = group.units;
-  let power = 0;
-  
-  // Sum up power for each unit
-  for (const unitId in units) {
-    const unit = units[unitId];
-      // Use power from UNITS definition if available, otherwise default to 1
-      const unitType = unit.type || unit.unitType;
-      let unitPower = 1; // Default power
-      
-      // Search for matching unit in UNITS definition
-      for (const key in UNITS) {
-        if (UNITS[key].type === unitType || key === unitType) {
-          unitPower = UNITS[key].power || 1;
-          break;
-        }
-      }
-      
-      power += unitPower;
-
-    // Add power from unit's level if available
-    if (unit.level) {
-      power += unit.level;
-    }
-
-    // Add power from equipped items
-    if (unit.equipment) {
-      for (const itemCode of Object.values(unit.equipment)) {
-        if (itemCode) power += getItemPower(itemCode);
-      }
-    }
+// Aggregate typed combat stats for a group (attack + defense per type, with level scaling)
+export function calculateGroupCombatStats(group) {
+  if (!group || !group.units) {
+    return { meleeAtk: 0, rangedAtk: 0, magicAtk: 0, meleeDef: 0, rangedDef: 0, magicDef: 0, unitCount: 0 };
   }
 
-  return power;
+  const totals = { meleeAtk: 0, rangedAtk: 0, magicAtk: 0, meleeDef: 0, rangedDef: 0, magicDef: 0 };
+  let unitCount = 0;
+
+  for (const unitId in group.units) {
+    const unit = group.units[unitId];
+    const unitType = unit.type || unit.unitType;
+    let unitDef = null;
+
+    for (const key in UNITS) {
+      if (key === unitType || UNITS[key].type === unitType) {
+        unitDef = UNITS[key];
+        break;
+      }
+    }
+
+    if (!unitDef) unitDef = {};
+
+    const level = unit.level || 1;
+    const sf = 1 + (level - 1) * 0.15; // 15% growth per level
+
+    if (unitDef.meleeAttack !== undefined) {
+      totals.meleeAtk += (unitDef.meleeAttack || 0) * sf;
+      totals.rangedAtk += (unitDef.rangedAttack || 0) * sf;
+      totals.magicAtk  += (unitDef.magicAttack  || 0) * sf;
+      totals.meleeDef  += (unitDef.meleeDefense  || 1) * sf;
+      totals.rangedDef += (unitDef.rangedDefense || 1) * sf;
+      totals.magicDef  += (unitDef.magicDefense  || 1) * sf;
+    } else {
+      // Fallback for units without typed stats (monsters, boats)
+      const p = (unitDef.power || 1) * sf;
+      totals.meleeAtk += p;
+      totals.meleeDef += 1 * sf;
+      totals.rangedDef += 1 * sf;
+      totals.magicDef  += 1 * sf;
+    }
+
+    // Unit's equipped items contribute to attack
+    if (unit.equipment) {
+      for (const itemCode of Object.values(unit.equipment)) {
+        if (itemCode) totals.meleeAtk += getItemPower(itemCode);
+      }
+    }
+
+    unitCount++;
+  }
+
+  return { ...totals, unitCount };
+}
+
+/**
+ * Returns a damage multiplier (0.3–1.0) representing how much of the attacker's
+ * typed damage gets through the defender's resistances.
+ */
+export function calculateDefenseMultiplier(attackerStats, defenderStats) {
+  const totalAtk = attackerStats.meleeAtk + attackerStats.rangedAtk + attackerStats.magicAtk;
+  if (totalAtk <= 0) return 1.0;
+
+  const count = defenderStats.unitCount || 1;
+  const avgMeleeDef  = defenderStats.meleeDef  / count;
+  const avgRangedDef = defenderStats.rangedDef / count;
+  const avgMagicDef  = defenderStats.magicDef  / count;
+
+  // Each defense point reduces that attack type: def=5 ≈ 50% reduction
+  const effMelee  = attackerStats.meleeAtk  / (1 + avgMeleeDef  / 5);
+  const effRanged = attackerStats.rangedAtk / (1 + avgRangedDef / 5);
+  const effMagic  = attackerStats.magicAtk  / (1 + avgMagicDef  / 5);
+
+  return Math.max(0.3, Math.min(1.0, (effMelee + effRanged + effMagic) / totalAtk));
+}
+
+// Calculate total attack power for a group (used as "power" in battle ratios)
+export function calculateGroupPower(group) {
+  if (!group) return 0;
+  const stats = calculateGroupCombatStats(group);
+  return stats.meleeAtk + stats.rangedAtk + stats.magicAtk + calculateItemPower(group);
 }
 
 // Calculate power contribution from group's items
@@ -140,69 +169,55 @@ export function calculatePowerRatios(side1Power, side2Power) {
  * @param {number} sideRatio - The power ratio of the side receiving casualties
  * @param {number} opposingRatio - The power ratio of the opposing side
  */
-export function calculateAttrition(sidePower, sideRatio, opposingRatio) {
+export function calculateAttrition(sidePower, sideRatio, opposingRatio, incomingDamageMultiplier = 1.0) {
   // Base attrition per tick (5-10% of opponent's power)
   const baseAttritionRate = 0.05 + (Math.random() * 0.05);
-  
+
   // Calculate raw attrition
   let attrition = Math.round(sidePower * baseAttritionRate * (opposingRatio + 0.5));
-  
+
   // Power dominance factor - how much stronger the opposing side is
-  // opposingRatio near 1.0 means opponent is very dominant
-  const powerDominance = Math.max(0, opposingRatio * 2 - 0.5); // Scale to 0-1.5 range
-  
-  // Chance of taking zero casualties decreases as opponent's power dominance increases
-  // When opposingRatio is 0.95+ (extreme dominance by opponent), high chance of casualties
+  const powerDominance = Math.max(0, opposingRatio * 2 - 0.5);
   const zeroAttritionChance = Math.min(0.9, (1 - powerDominance) * 0.95);
-  
-  // IMPROVED: Allow dominant sides to sometimes avoid casualties
-  // If this side is clearly dominant (high ratio > 0.7) and facing a much weaker opponent (ratio < 0.3)
+
   if (sideRatio > 0.7 && opposingRatio < 0.3) {
-    // Higher chance to avoid casualties when dominance is greater
     const dominanceDelta = sideRatio - opposingRatio;
-    const noCasualtyChance = Math.min(0.8, dominanceDelta * 0.9); // 80% max chance for no casualties
-    
+    const noCasualtyChance = Math.min(0.8, dominanceDelta * 0.9);
+
     if (Math.random() < noCasualtyChance) {
       console.log(`Dominant side with ${sideRatio.toFixed(2)} power ratio avoids casualties due to overwhelming advantage`);
       return 0;
     }
-    
+
     console.log(`Dominant side with ${sideRatio.toFixed(2)} power ratio takes minimal casualties`);
-    return 1; // Minimum casualties when dominant side does take damage
-  }
-  
-  // FIXED: Only allow zero attrition for weaker sides (lower ratio = weaker)
-  // This means a powerful side can't avoid casualties when facing a weaker opponent
-  if (opposingRatio > 0.75 && sideRatio < 0.25 && Math.random() < zeroAttritionChance) {
+    attrition = 1;
+  } else if (opposingRatio > 0.75 && sideRatio < 0.25 && Math.random() < zeroAttritionChance) {
     attrition = 0;
     console.log(`Side with ${sideRatio.toFixed(2)} power ratio takes no casualties due to random chance`);
-  } 
-  // For more balanced sides or when random chance doesn't lead to zero attrition
-  else if (sidePower > 0) {
-    // MODIFIED: Only ensure minimum attrition of 1 if sides are relatively balanced
-    // This allows battles with clear power differences to resolve without forcing casualties
-    const isCloselyMatched = Math.abs(sideRatio - 0.5) < 0.25; // Within 25% of even match
-    
+  } else if (sidePower > 0) {
+    const isCloselyMatched = Math.abs(sideRatio - 0.5) < 0.25;
+
     if (isCloselyMatched) {
-      // For closely matched battles, ensure some casualties to prevent stalemates
       attrition = Math.max(1, attrition);
       console.log(`Close battle: ensuring minimum attrition of 1 for side with ${sideRatio.toFixed(2)} ratio`);
     } else if (attrition === 0 && sideRatio < 0.4) {
-      // For unbalanced battles where weaker side would take 0 attrition, 
-      // still apply some chance of taking casualties to prevent permanent stalemates
-      const unluckyChance = 0.3 + (0.4 - sideRatio); // Higher chance as ratio decreases
+      const unluckyChance = 0.3 + (0.4 - sideRatio);
       if (Math.random() < unluckyChance) {
         attrition = 1;
         console.log(`Unlucky weaker side (${sideRatio.toFixed(2)}) takes 1 attrition despite low calculation`);
       }
     }
-    
-    // ADDED: Log to show casualties are being applied to a weak side
+
     if (opposingRatio > 0.75 && sideRatio < 0.25 && attrition > 0) {
       console.log(`Weaker side with ${sideRatio.toFixed(2)} power ratio takes ${attrition} casualties`);
     }
   }
-  
+
+  // Apply type-matchup defense reduction (high defense = fewer casualties)
+  if (incomingDamageMultiplier < 1.0 && attrition > 0) {
+    attrition = Math.max(0, Math.floor(attrition * incomingDamageMultiplier));
+  }
+
   return attrition;
 }
 

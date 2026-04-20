@@ -6,16 +6,20 @@ const UNITS = {
         category: 'player',
         type: 'player',
         power: 10,
+        meleeAttack: 5, rangedAttack: 3, magicAttack: 2,
+        meleeDefense: 5, rangedDefense: 4, magicDefense: 3,
         carryCapacity: 15,
         icon: 'player'
     },
-    
+
     'human_warrior': {
         name: 'Footman',
         description: "Armored sword-wielder trained in formation combat",
         category: 'player',
         type: 'warrior',
         power: 1.2,
+        meleeAttack: 1.2, rangedAttack: 0, magicAttack: 0,
+        meleeDefense: 4, rangedDefense: 2, magicDefense: 1,
         carryCapacity: 5,
         timePerUnit: 1.1,
         icon: 'sword',
@@ -31,6 +35,8 @@ const UNITS = {
         category: 'player',
         type: 'scout',
         power: 0.6,
+        meleeAttack: 0.2, rangedAttack: 0.4, magicAttack: 0,
+        meleeDefense: 1, rangedDefense: 3, magicDefense: 1,
         carryCapacity: 10,
         timePerUnit: 0.75,
         icon: 'boots',
@@ -49,6 +55,8 @@ const UNITS = {
         category: 'player',
         type: 'warrior',
         power: 1,
+        meleeAttack: 1.0, rangedAttack: 0, magicAttack: 0,
+        meleeDefense: 2, rangedDefense: 1, magicDefense: 1,
         carryCapacity: 6,
         timePerUnit: 0.9,
         icon: 'axe',
@@ -64,6 +72,8 @@ const UNITS = {
         category: 'player',
         type: 'scout',
         power: 0.7,
+        meleeAttack: 0.35, rangedAttack: 0.35, magicAttack: 0,
+        meleeDefense: 1, rangedDefense: 2, magicDefense: 1,
         carryCapacity: 10,
         timePerUnit: 0.6,
         icon: 'dagger',
@@ -82,6 +92,8 @@ const UNITS = {
         category: 'player',
         type: 'warrior',
         power: 1.4,
+        meleeAttack: 1.1, rangedAttack: 0.3, magicAttack: 0,
+        meleeDefense: 3, rangedDefense: 3, magicDefense: 2,
         carryCapacity: 7,
         timePerUnit: 1.2,
         icon: 'blades',
@@ -97,6 +109,8 @@ const UNITS = {
         category: 'player',
         type: 'scout',
         power: 0.8,
+        meleeAttack: 0.1, rangedAttack: 0.7, magicAttack: 0,
+        meleeDefense: 1, rangedDefense: 4, magicDefense: 2,
         carryCapacity: 10,
         timePerUnit: 0.8,
         icon: 'eye',
@@ -115,6 +129,8 @@ const UNITS = {
         category: 'player',
         type: 'warrior',
         power: 0.9,
+        meleeAttack: 0.7, rangedAttack: 0, magicAttack: 0.2,
+        meleeDefense: 2, rangedDefense: 1, magicDefense: 5,
         carryCapacity: 5,
         timePerUnit: 0.8,
         icon: 'thorn',
@@ -130,6 +146,8 @@ const UNITS = {
         category: 'player',
         type: 'scout',
         power: 0.4,
+        meleeAttack: 0.1, rangedAttack: 0.2, magicAttack: 0.1,
+        meleeDefense: 1, rangedDefense: 2, magicDefense: 3,
         carryCapacity: 8,
         timePerUnit: 0.5,
         icon: 'wing',
@@ -148,6 +166,8 @@ const UNITS = {
         category: 'player',
         type: 'warrior',
         power: 1.5,
+        meleeAttack: 1.5, rangedAttack: 0, magicAttack: 0,
+        meleeDefense: 6, rangedDefense: 3, magicDefense: 1,
         carryCapacity: 5,
         timePerUnit: 1.3,
         icon: 'hammer',
@@ -163,6 +183,8 @@ const UNITS = {
         category: 'player',
         type: 'scout',
         power: 0.5,
+        meleeAttack: 0.3, rangedAttack: 0.2, magicAttack: 0,
+        meleeDefense: 2, rangedDefense: 2, magicDefense: 1,
         carryCapacity: 8,
         timePerUnit: 0.85,
         icon: 'pick',
@@ -181,6 +203,8 @@ const UNITS = {
         category: 'player',
         type: 'support',
         power: 0.2,
+        meleeAttack: 0, rangedAttack: 0, magicAttack: 0.2,
+        meleeDefense: 1, rangedDefense: 1, magicDefense: 4,
         carryCapacity: 8,
         timePerUnit: 1.2,
         icon: 'cross',
@@ -196,6 +220,8 @@ const UNITS = {
         category: 'player',
         type: 'support',
         power: 0.8,
+        meleeAttack: 0, rangedAttack: 0, magicAttack: 0.8,
+        meleeDefense: 1, rangedDefense: 1, magicDefense: 4,
         carryCapacity: 8,
         timePerUnit: 1.5,
         icon: 'staff',
@@ -211,6 +237,8 @@ const UNITS = {
         category: 'player',
         type: 'support',
         power: 1,
+        meleeAttack: 0.8, rangedAttack: 0.2, magicAttack: 0,
+        meleeDefense: 2, rangedDefense: 2, magicDefense: 1,
         carryCapacity: 12,
         timePerUnit: 2,
         icon: 'gear',
@@ -228,17 +256,19 @@ const UNITS = {
         category: 'player',
         type: 'knight',
         power: 2,
+        meleeAttack: 2.0, rangedAttack: 0, magicAttack: 0,
+        meleeDefense: 7, rangedDefense: 4, magicDefense: 1,
         carryCapacity: 3,
-        timePerUnit: 1.5, // in ticks (was 90 seconds)
+        timePerUnit: 1.5,
         icon: 'shield',
         race: 'human',
         cost: { WOODEN_STICKS: 1, STONE_PIECES: 2, IRON: 1 },
         requirements: {
             structureLevel: 2,
             race: 'human',
-            structureType: ['basic_shelter', 'workshop'], // Now requires specific structure types
-            buildingType: 'smithy',     // Requires a smithy building
-            buildingLevel: 2            // Smithy must be at least level 2
+            structureType: ['basic_shelter', 'workshop'],
+            buildingType: 'smithy',
+            buildingLevel: 2
         },
         recruitment: {
             sortOrder: 100,
@@ -252,16 +282,18 @@ const UNITS = {
         category: 'player',
         type: 'archer',
         power: 1.5,
+        meleeAttack: 0.2, rangedAttack: 1.3, magicAttack: 0,
+        meleeDefense: 1, rangedDefense: 4, magicDefense: 3,
         carryCapacity: 7,
-        timePerUnit: 1.25, // in ticks (was 75 seconds)
+        timePerUnit: 1.25,
         icon: 'bow',
         race: 'elf',
         cost: { WOODEN_STICKS: 3, LEATHER: 1 },
         requirements: {
             structureLevel: 2,
             race: 'elf',
-            buildingType: 'barracks', // Requires a barracks building
-            buildingLevel: 1          // Barracks must be at least level 1
+            buildingType: 'barracks',
+            buildingLevel: 1
         },
         recruitment: {
             sortOrder: 110,
@@ -275,16 +307,18 @@ const UNITS = {
         category: 'player',
         type: 'defender',
         power: 2,
+        meleeAttack: 1.5, rangedAttack: 0, magicAttack: 0.5,
+        meleeDefense: 7, rangedDefense: 5, magicDefense: 2,
         carryCapacity: 3,
-        timePerUnit: 1.5, // in ticks (was 90 seconds)
+        timePerUnit: 1.5,
         icon: 'shield',
         race: 'dwarf',
         cost: { STONE_PIECES: 2, IRON: 2 },
         requirements: {
             structureLevel: 2,
             race: 'dwarf',
-            buildingType: 'wall',  // Requires defensive wall building
-            buildingLevel: 2       // Wall must be at least level 2
+            buildingType: 'wall',
+            buildingLevel: 2
         },
         recruitment: {
             sortOrder: 120,
@@ -298,8 +332,10 @@ const UNITS = {
         category: 'player',
         type: 'raider',
         power: 0.75,
+        meleeAttack: 0.4, rangedAttack: 0.35, magicAttack: 0,
+        meleeDefense: 1, rangedDefense: 2, magicDefense: 1,
         carryCapacity: 8,
-        timePerUnit: 0.5, // in ticks (was 30 seconds)
+        timePerUnit: 0.5,
         icon: 'sword',
         race: 'goblin',
         cost: { WOODEN_STICKS: 1 },
@@ -319,17 +355,19 @@ const UNITS = {
         category: 'player',
         type: 'enchanter',
         power: 1.5,
+        meleeAttack: 0, rangedAttack: 0, magicAttack: 1.5,
+        meleeDefense: 1, rangedDefense: 2, magicDefense: 5,
         carryCapacity: 6,
-        timePerUnit: 1, // in ticks (was 60 seconds)
+        timePerUnit: 1,
         icon: 'staff',
         race: 'fairy',
         cost: { herbs: 2, crystal: 1 },
         requirements: {
             structureLevel: 2,
             race: 'fairy',
-            buildingType: 'academy',  // Requires academy building
-            buildingLevel: 1,         // Academy must be at least level 1
-            research: 'basic_research' // Requires basic research to be completed
+            buildingType: 'academy',
+            buildingLevel: 1,
+            research: 'basic_research'
         },
         recruitment: {
             sortOrder: 140,
@@ -345,15 +383,17 @@ const UNITS = {
         category: 'player',
         type: 'elite',
         power: 3,
+        meleeAttack: 1.5, rangedAttack: 1.0, magicAttack: 0.5,
+        meleeDefense: 5, rangedDefense: 4, magicDefense: 3,
         carryCapacity: 4,
-        timePerUnit: 2, // in ticks (was 120 seconds)
+        timePerUnit: 2,
         icon: 'shield',
         cost: { WOODEN_STICKS: 2, STONE_PIECES: 2, IRON: 2 },
         requirements: {
-            structureType: ['fortress', 'stronghold', 'watchtower'], // Added watchtower as valid structure
+            structureType: ['fortress', 'stronghold', 'watchtower'],
             structureLevel: 2,
-            buildingType: 'barracks',  // Requires barracks building
-            buildingLevel: 3           // Barracks must be at least level 3
+            buildingType: 'barracks',
+            buildingLevel: 3
         },
         recruitment: {
             sortOrder: 200,
@@ -367,16 +407,18 @@ const UNITS = {
         category: 'player',
         type: 'siege',
         power: 1.5,
+        meleeAttack: 1.5, rangedAttack: 0, magicAttack: 0,
+        meleeDefense: 2, rangedDefense: 1, magicDefense: 1,
         carryCapacity: 2,
-        timePerUnit: 3, // in ticks (was 180 seconds)
+        timePerUnit: 3,
         icon: 'shield',
         cost: { WOODEN_STICKS: 5, STONE_PIECES: 3, IRON: 2 },
         requirements: {
-            structureType: ['fortress', 'stronghold', 'workshop'], // Added workshop as valid structure
+            structureType: ['fortress', 'stronghold', 'workshop'],
             structureLevel: 3,
-            buildingType: 'smithy',    // Requires smithy building
-            buildingLevel: 4,          // Smithy must be at least level 4
-            research: 'siegecraft'     // Requires siegecraft research
+            buildingType: 'smithy',
+            buildingLevel: 4,
+            research: 'siegecraft'
         },
         recruitment: {
             sortOrder: 300,
@@ -392,15 +434,17 @@ const UNITS = {
         category: 'player',
         type: 'worker',
         power: 1.0,
+        meleeAttack: 0.7, rangedAttack: 0.3, magicAttack: 0,
+        meleeDefense: 2, rangedDefense: 2, magicDefense: 1,
         carryCapacity: 12,
-        timePerUnit: 2, // in ticks (was 120 seconds)
+        timePerUnit: 2,
         icon: 'hammer',
         cost: { WOODEN_STICKS: 3, STONE_PIECES: 3, IRON: 1 },
         requirements: {
-            structureType: ['workshop', 'storage'], // Requires specific structure types
+            structureType: ['workshop', 'storage'],
             structureLevel: 2,
-            buildingType: 'smithy',    // Requires smithy building
-            buildingLevel: 3           // Smithy must be at least level 3
+            buildingType: 'smithy',
+            buildingLevel: 3
         },
         recruitment: {
             sortOrder: 250,
@@ -416,15 +460,17 @@ const UNITS = {
         category: 'player',
         type: 'gatherer',
         power: 0.5,
+        meleeAttack: 0.3, rangedAttack: 0.2, magicAttack: 0,
+        meleeDefense: 1, rangedDefense: 1, magicDefense: 1,
         carryCapacity: 20,
-        timePerUnit: 1.5, // in ticks (was 90 seconds)
+        timePerUnit: 1.5,
         icon: 'pickaxe',
         cost: { WOODEN_STICKS: 2, tools: 1 },
         requirements: {
-            structureType: ['storage'], // Requires storage structure
+            structureType: ['storage'],
             structureLevel: 1,
-            buildingType: 'mine',    // Requires mine building
-            buildingLevel: 2         // Mine must be at least level 2
+            buildingType: 'mine',
+            buildingLevel: 2
         },
         recruitment: {
             sortOrder: 150,
