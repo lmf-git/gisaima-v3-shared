@@ -5,7 +5,6 @@ const UNITS = {
         description: "The player's own character",
         category: 'player',
         type: 'player',
-        power: 10,
         meleeAttack: 5, rangedAttack: 3, magicAttack: 2,
         meleeDefense: 5, rangedDefense: 4, magicDefense: 3,
         carryCapacity: 15,
@@ -17,7 +16,6 @@ const UNITS = {
         description: "Armored sword-wielder trained in formation combat",
         category: 'player',
         type: 'warrior',
-        power: 1.2,
         meleeAttack: 1.2, rangedAttack: 0, magicAttack: 0,
         meleeDefense: 4, rangedDefense: 2, magicDefense: 1,
         carryCapacity: 5,
@@ -34,7 +32,6 @@ const UNITS = {
         description: "Quick runner, ideal for early recon",
         category: 'player',
         type: 'scout',
-        power: 0.6,
         meleeAttack: 0.2, rangedAttack: 0.4, magicAttack: 0,
         meleeDefense: 1, rangedDefense: 3, magicDefense: 1,
         carryCapacity: 10,
@@ -54,7 +51,6 @@ const UNITS = {
         description: "Wild axe-wielder with low armor but high aggression",
         category: 'player',
         type: 'warrior',
-        power: 1,
         meleeAttack: 1.0, rangedAttack: 0, magicAttack: 0,
         meleeDefense: 2, rangedDefense: 1, magicDefense: 1,
         carryCapacity: 6,
@@ -71,7 +67,6 @@ const UNITS = {
         description: "Stealthy scout with backstab potential",
         category: 'player',
         type: 'scout',
-        power: 0.7,
         meleeAttack: 0.35, rangedAttack: 0.35, magicAttack: 0,
         meleeDefense: 1, rangedDefense: 2, magicDefense: 1,
         carryCapacity: 10,
@@ -91,7 +86,6 @@ const UNITS = {
         description: "Graceful fighter with dual blades",
         category: 'player',
         type: 'warrior',
-        power: 1.4,
         meleeAttack: 1.1, rangedAttack: 0.3, magicAttack: 0,
         meleeDefense: 3, rangedDefense: 3, magicDefense: 2,
         carryCapacity: 7,
@@ -108,7 +102,6 @@ const UNITS = {
         description: "Eagle-eyed archer with long sight",
         category: 'player',
         type: 'scout',
-        power: 0.8,
         meleeAttack: 0.1, rangedAttack: 0.7, magicAttack: 0,
         meleeDefense: 1, rangedDefense: 4, magicDefense: 2,
         carryCapacity: 10,
@@ -128,7 +121,6 @@ const UNITS = {
         description: "Tiny but magical melee defender",
         category: 'player',
         type: 'warrior',
-        power: 0.9,
         meleeAttack: 0.7, rangedAttack: 0, magicAttack: 0.2,
         meleeDefense: 2, rangedDefense: 1, magicDefense: 5,
         carryCapacity: 5,
@@ -145,7 +137,6 @@ const UNITS = {
         description: "Flies quickly and sees across wide ranges",
         category: 'player',
         type: 'scout',
-        power: 0.4,
         meleeAttack: 0.1, rangedAttack: 0.2, magicAttack: 0.1,
         meleeDefense: 1, rangedDefense: 2, magicDefense: 3,
         carryCapacity: 8,
@@ -165,7 +156,6 @@ const UNITS = {
         description: "Heavy axe and shield user, excels in defense",
         category: 'player',
         type: 'warrior',
-        power: 1.5,
         meleeAttack: 1.5, rangedAttack: 0, magicAttack: 0,
         meleeDefense: 6, rangedDefense: 3, magicDefense: 1,
         carryCapacity: 5,
@@ -182,7 +172,6 @@ const UNITS = {
         description: "Short-range, underground recon unit",
         category: 'player',
         type: 'scout',
-        power: 0.5,
         meleeAttack: 0.3, rangedAttack: 0.2, magicAttack: 0,
         meleeDefense: 2, rangedDefense: 2, magicDefense: 1,
         carryCapacity: 8,
@@ -202,7 +191,6 @@ const UNITS = {
         description: "Supports allies by restoring their strength",
         category: 'player',
         type: 'support',
-        power: 0.2,
         meleeAttack: 0, rangedAttack: 0, magicAttack: 0.2,
         meleeDefense: 1, rangedDefense: 1, magicDefense: 4,
         carryCapacity: 8,
@@ -219,7 +207,6 @@ const UNITS = {
         description: "Casts weak offensive spells and buffs",
         category: 'player',
         type: 'support',
-        power: 0.8,
         meleeAttack: 0, rangedAttack: 0, magicAttack: 0.8,
         meleeDefense: 1, rangedDefense: 1, magicDefense: 4,
         carryCapacity: 8,
@@ -236,7 +223,6 @@ const UNITS = {
         description: "Builds and operates siege equipment",
         category: 'player',
         type: 'support',
-        power: 1,
         meleeAttack: 0.8, rangedAttack: 0.2, magicAttack: 0,
         meleeDefense: 2, rangedDefense: 2, magicDefense: 1,
         carryCapacity: 12,
@@ -255,7 +241,6 @@ const UNITS = {
         description: "Heavily armored warrior with high defense",
         category: 'player',
         type: 'knight',
-        power: 2,
         meleeAttack: 2.0, rangedAttack: 0, magicAttack: 0,
         meleeDefense: 7, rangedDefense: 4, magicDefense: 1,
         carryCapacity: 3,
@@ -281,7 +266,6 @@ const UNITS = {
         description: "Skilled ranged fighter with deadly accuracy",
         category: 'player',
         type: 'archer',
-        power: 1.5,
         meleeAttack: 0.2, rangedAttack: 1.3, magicAttack: 0,
         meleeDefense: 1, rangedDefense: 4, magicDefense: 3,
         carryCapacity: 7,
@@ -306,7 +290,6 @@ const UNITS = {
         description: "Sturdy warrior specialized in defense",
         category: 'player',
         type: 'defender',
-        power: 2,
         meleeAttack: 1.5, rangedAttack: 0, magicAttack: 0.5,
         meleeDefense: 7, rangedDefense: 5, magicDefense: 2,
         carryCapacity: 3,
@@ -331,7 +314,6 @@ const UNITS = {
         description: "Quick but weak fighter, good in groups",
         category: 'player',
         type: 'raider',
-        power: 0.75,
         meleeAttack: 0.4, rangedAttack: 0.35, magicAttack: 0,
         meleeDefense: 1, rangedDefense: 2, magicDefense: 1,
         carryCapacity: 8,
@@ -354,7 +336,6 @@ const UNITS = {
         description: "Magical unit with support abilities",
         category: 'player',
         type: 'enchanter',
-        power: 1.5,
         meleeAttack: 0, rangedAttack: 0, magicAttack: 1.5,
         meleeDefense: 1, rangedDefense: 2, magicDefense: 5,
         carryCapacity: 6,
@@ -382,7 +363,6 @@ const UNITS = {
         description: "Highly trained soldier with advanced combat skills",
         category: 'player',
         type: 'elite',
-        power: 3,
         meleeAttack: 1.5, rangedAttack: 1.0, magicAttack: 0.5,
         meleeDefense: 5, rangedDefense: 4, magicDefense: 3,
         carryCapacity: 4,
@@ -406,7 +386,6 @@ const UNITS = {
         description: "Siege unit effective against structures",
         category: 'player',
         type: 'siege',
-        power: 1.5,
         meleeAttack: 1.5, rangedAttack: 0, magicAttack: 0,
         meleeDefense: 2, rangedDefense: 1, magicDefense: 1,
         carryCapacity: 2,
@@ -433,7 +412,6 @@ const UNITS = {
         description: "Skilled worker who can construct and repair at higher speeds",
         category: 'player',
         type: 'worker',
-        power: 1.0,
         meleeAttack: 0.7, rangedAttack: 0.3, magicAttack: 0,
         meleeDefense: 2, rangedDefense: 2, magicDefense: 1,
         carryCapacity: 12,
@@ -459,7 +437,6 @@ const UNITS = {
         description: "Specialized unit that gathers resources more efficiently",
         category: 'player',
         type: 'gatherer',
-        power: 0.5,
         meleeAttack: 0.3, rangedAttack: 0.2, magicAttack: 0,
         meleeDefense: 1, rangedDefense: 1, magicDefense: 1,
         carryCapacity: 20,
@@ -706,12 +683,13 @@ const UNITS = {
         unitCountRange: [1, 4],
         itemChance: 0.6,
         mergeLimit: 8,
-        power: 0.7,
+        meleeAttack: 0.4, rangedAttack: 0.3, magicAttack: 0,
+        meleeDefense: 1, rangedDefense: 1, magicDefense: 0.5,
         speed: 1.2,
-        motion: ['ground'], // Adding motion property for existing monsters
+        motion: ['ground'],
         possibleItems: ['Wooden Sticks', 'Stolen Goods', 'Crude Weapon'],
         biomePreference: ['plains', 'forest'],
-        personalityPreferences: ['SNEAKY', 'CAUTIOUS'] // Goblins tend to be sneaky thieves
+        personalityPreferences: ['SNEAKY', 'CAUTIOUS']
     },
     'wolf': {
         name: "Wild Wolves",
@@ -721,12 +699,13 @@ const UNITS = {
         unitCountRange: [2, 5],
         itemChance: 0.4,
         mergeLimit: 10,
-        power: 1.2,
+        meleeAttack: 1.2, rangedAttack: 0, magicAttack: 0,
+        meleeDefense: 1.5, rangedDefense: 0.5, magicDefense: 0.5,
         speed: 1.5,
-        motion: ['ground'], // Adding motion property
+        motion: ['ground'],
         possibleItems: ['Wolf Meat', 'Wolf Pelt', 'Wolf Fang'],
         biomePreference: ['forest', 'tundra'],
-        personalityPreferences: ['FERAL', 'AGGRESSIVE', 'TERRITORIAL'] // Wolves are wild and territorial
+        personalityPreferences: ['FERAL', 'AGGRESSIVE', 'TERRITORIAL']
     },
     'bandit': {
         name: "Bandits",
@@ -736,12 +715,13 @@ const UNITS = {
         unitCountRange: [2, 4],
         itemChance: 0.8,
         mergeLimit: 6,
-        power: 1.0,
+        meleeAttack: 0.6, rangedAttack: 0.4, magicAttack: 0,
+        meleeDefense: 1.5, rangedDefense: 1, magicDefense: 0.5,
         speed: 1.0,
-        motion: ['ground'], // Adding motion property
+        motion: ['ground'],
         possibleItems: ['Ancient Coin', 'Crude Weapon', 'Leather Scraps'],
         biomePreference: ['plains', 'forest'],
-        personalityPreferences: ['AGGRESSIVE', 'SNEAKY'] // Bandits are either direct attackers or stealthy thieves
+        personalityPreferences: ['AGGRESSIVE', 'SNEAKY']
     },
     'spider': {
         name: "Giant Spiders",
@@ -751,12 +731,13 @@ const UNITS = {
         unitCountRange: [1, 6],
         itemChance: 0.5,
         mergeLimit: 12,
-        power: 0.9,
+        meleeAttack: 0.6, rangedAttack: 0, magicAttack: 0.3,
+        meleeDefense: 1, rangedDefense: 1, magicDefense: 0.5,
         speed: 1.2,
-        motion: ['ground'], // Adding motion property
+        motion: ['ground'],
         possibleItems: ['Spider Silk', 'Venom Sac', 'Spider Eye'],
         biomePreference: ['forest', 'swamp'],
-        personalityPreferences: ['SNEAKY', 'TERRITORIAL'] // Spiders are territorial and sneaky
+        personalityPreferences: ['SNEAKY', 'TERRITORIAL']
     },
     'skeleton': {
         name: "Undead Skeletons",
@@ -766,12 +747,13 @@ const UNITS = {
         unitCountRange: [3, 7],
         itemChance: 0.7,
         mergeLimit: 15,
-        power: 0.8,
+        meleeAttack: 0.8, rangedAttack: 0, magicAttack: 0,
+        meleeDefense: 1.5, rangedDefense: 0.5, magicDefense: 0.5,
         speed: 0.9,
-        motion: ['ground'], // Adding motion property
+        motion: ['ground'],
         possibleItems: ['Bone Dust', 'Ancient Blade', 'Soul Essence'],
         biomePreference: ['desert', 'mountain', 'ruins'],
-        personalityPreferences: ['NOMADIC', 'FERAL'] // Undead wander aimlessly and unpredictably
+        personalityPreferences: ['NOMADIC', 'FERAL']
     },
     'troll': {
         name: "Mountain Troll",
@@ -781,12 +763,13 @@ const UNITS = {
         unitCountRange: [1, 2],
         itemChance: 0.9,
         mergeLimit: 3,
-        power: 2.5,
+        meleeAttack: 2.5, rangedAttack: 0, magicAttack: 0,
+        meleeDefense: 4, rangedDefense: 2, magicDefense: 1,
         speed: 0.7,
-        motion: ['ground'], // Adding motion property
+        motion: ['ground'],
         possibleItems: ['Troll Hide', 'Troll Club', 'Troll Tooth'],
         biomePreference: ['mountain', 'hills'],
-        personalityPreferences: ['AGGRESSIVE', 'TERRITORIAL'] // Trolls are aggressive and territorial
+        personalityPreferences: ['AGGRESSIVE', 'TERRITORIAL']
     },
     'elemental': {
         name: "Wild Elemental",
@@ -796,15 +779,16 @@ const UNITS = {
         unitCountRange: [1, 3],
         itemChance: 0.8,
         mergeLimit: 5,
-        power: 2.0,
+        meleeAttack: 0.5, rangedAttack: 0, magicAttack: 1.5,
+        meleeDefense: 1, rangedDefense: 1, magicDefense: 4,
         speed: 1.0,
-        motion: ['ground', 'flying'], // Elementals can fly
+        motion: ['ground', 'flying'],
         possibleItems: ['Elemental Essence', 'Shiny Gem', 'Magical Residue'],
         biomePreference: ['tundra', 'desert', 'swamp'],
-        personalityPreferences: ['FERAL', 'NOMADIC'] // Elementals are wild and wander
+        personalityPreferences: ['FERAL', 'NOMADIC']
     },
-    
-    // New Water-Only Monster Units
+
+    // Water-Only Monster Units
     'merfolk': {
         name: "Merfolk Raiders",
         description: "Aquatic humanoids skilled with tridents and water magic",
@@ -813,9 +797,10 @@ const UNITS = {
         unitCountRange: [2, 5],
         itemChance: 0.7,
         mergeLimit: 8,
-        power: 1.3,
+        meleeAttack: 0.8, rangedAttack: 0.2, magicAttack: 0.3,
+        meleeDefense: 1.5, rangedDefense: 1.5, magicDefense: 1,
         speed: 1.2,
-        motion: ['water'], // Water-only movement
+        motion: ['water'],
         possibleItems: ['Coral Shard', 'Pearl', 'Sea Essence'],
         biomePreference: ['ocean', 'sea', 'shallows'],
         personalityPreferences: ['TERRITORIAL', 'AGGRESSIVE']
@@ -828,9 +813,10 @@ const UNITS = {
         unitCountRange: [1, 2],
         itemChance: 0.6,
         mergeLimit: 3,
-        power: 2.0,
+        meleeAttack: 2.0, rangedAttack: 0, magicAttack: 0,
+        meleeDefense: 3, rangedDefense: 1.5, magicDefense: 0.5,
         speed: 1.4,
-        motion: ['water'], // Water-only movement
+        motion: ['water'],
         possibleItems: ['Serpent Scale', 'Serpent Tooth', 'Sea Essence'],
         biomePreference: ['deep_ocean', 'ocean'],
         personalityPreferences: ['AGGRESSIVE', 'TERRITORIAL']
@@ -843,9 +829,10 @@ const UNITS = {
         unitCountRange: [2, 4],
         itemChance: 0.5,
         mergeLimit: 7,
-        power: 1.5,
+        meleeAttack: 1.5, rangedAttack: 0, magicAttack: 0,
+        meleeDefense: 2, rangedDefense: 1, magicDefense: 0.5,
         speed: 1.6,
-        motion: ['water'], // Water-only movement
+        motion: ['water'],
         possibleItems: ['Shark Tooth', 'Shark Fin', 'Raw Fish'],
         biomePreference: ['ocean', 'deep_ocean', 'sea'],
         personalityPreferences: ['FERAL', 'NOMADIC']
@@ -858,9 +845,10 @@ const UNITS = {
         unitCountRange: [1, 1],
         itemChance: 0.9,
         mergeLimit: 1,
-        power: 3.0,
+        meleeAttack: 2.5, rangedAttack: 0, magicAttack: 0.5,
+        meleeDefense: 4, rangedDefense: 2, magicDefense: 2,
         speed: 0.8,
-        motion: ['water'], // Water-only movement
+        motion: ['water'],
         possibleItems: ['Kraken Ink', 'Giant Tentacle', 'Ancient Pearl'],
         biomePreference: ['deep_ocean'],
         personalityPreferences: ['TERRITORIAL', 'AGGRESSIVE']
@@ -873,9 +861,10 @@ const UNITS = {
         unitCountRange: [3, 6],
         itemChance: 0.6,
         mergeLimit: 10,
-        power: 0.8,
+        meleeAttack: 0.8, rangedAttack: 0, magicAttack: 0,
+        meleeDefense: 1.5, rangedDefense: 0.5, magicDefense: 0.5,
         speed: 0.7,
-        motion: ['water'], // Water-only movement
+        motion: ['water'],
         possibleItems: ['Waterlogged Bone', 'Barnacles', 'Rusted Metal'],
         biomePreference: ['sea', 'shallows', 'river'],
         personalityPreferences: ['FERAL', 'NOMADIC']

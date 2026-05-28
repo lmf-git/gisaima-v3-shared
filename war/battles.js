@@ -60,21 +60,12 @@ export function calculateGroupCombatStats(group) {
     const level = unit.level || 1;
     const sf = 1 + (level - 1) * 0.15; // 15% growth per level
 
-    if (unitDef.meleeAttack !== undefined) {
-      totals.meleeAtk += (unitDef.meleeAttack || 0) * sf;
-      totals.rangedAtk += (unitDef.rangedAttack || 0) * sf;
-      totals.magicAtk  += (unitDef.magicAttack  || 0) * sf;
-      totals.meleeDef  += (unitDef.meleeDefense  || 1) * sf;
-      totals.rangedDef += (unitDef.rangedDefense || 1) * sf;
-      totals.magicDef  += (unitDef.magicDefense  || 1) * sf;
-    } else {
-      // Fallback for units without typed stats (monsters, boats)
-      const p = (unitDef.power || 1) * sf;
-      totals.meleeAtk += p;
-      totals.meleeDef += 1 * sf;
-      totals.rangedDef += 1 * sf;
-      totals.magicDef  += 1 * sf;
-    }
+    totals.meleeAtk += (unitDef.meleeAttack  || 0) * sf;
+    totals.rangedAtk += (unitDef.rangedAttack || 0) * sf;
+    totals.magicAtk  += (unitDef.magicAttack  || 0) * sf;
+    totals.meleeDef  += (unitDef.meleeDefense  || 1) * sf;
+    totals.rangedDef += (unitDef.rangedDefense || 1) * sf;
+    totals.magicDef  += (unitDef.magicDefense  || 1) * sf;
 
     // Unit's equipped items contribute to attack
     if (unit.equipment) {
@@ -659,7 +650,7 @@ function getPvPCriticalHits(battle) {
               combo: unit.comboCritical ? "Combo" : undefined,
               isOutnumbered: unit.outnumbered === true,
               criticalLevel: unit.level || 1, // Include unit level for scaling
-              basePower: UNITS[unit.unitType]?.power || 1 // Base power from unit type
+              basePower: (() => { const d = UNITS[unit.unitType]; return d ? (d.meleeAttack||0)+(d.rangedAttack||0)+(d.magicAttack||0) : 0; })()
             });
           }
         }
@@ -685,7 +676,7 @@ function getPvPCriticalHits(battle) {
               combo: unit.comboCritical ? "Combo" : undefined,
               isOutnumbered: unit.outnumbered === true,
               criticalLevel: unit.level || 1, // Include unit level for scaling
-              basePower: UNITS[unit.unitType]?.power || 1 // Base power from unit type
+              basePower: (() => { const d = UNITS[unit.unitType]; return d ? (d.meleeAttack||0)+(d.rangedAttack||0)+(d.magicAttack||0) : 0; })()
             });
           }
         }
