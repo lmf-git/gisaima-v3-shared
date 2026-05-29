@@ -516,6 +516,7 @@ export function selectUnitsForCasualties(units, attritionCount) {
       
       playersKilled.push({
         playerId: playerUnit.id,
+        uid: playerUnit.uid,
         displayName: playerUnit.displayName || "Unknown Player",
         killedBy: playerUnit.targetId ? { id: playerUnit.targetId, critical: criticalHit } : undefined
       });
@@ -546,9 +547,10 @@ export function selectUnitsForCasualties(units, attritionCount) {
         
         playersKilled.push({
           playerId: playerUnit.id,
+          uid: playerUnit.uid,
           displayName: playerUnit.displayName || "Unknown Player"
         });
-        
+
         console.log(`Solo player killed - opponent too strong (${powerDifferenceMultiplier.toFixed(1)}x stronger, attrition: ${adjustedAttrition})`);
       } else {
         console.log(`Solo player survived against stronger opponent (${powerDifferenceMultiplier.toFixed(1)}x) - low attrition (${adjustedAttrition})`);
@@ -560,9 +562,10 @@ export function selectUnitsForCasualties(units, attritionCount) {
       
       playersKilled.push({
         playerId: playerUnit.id,
+        uid: playerUnit.uid,
         displayName: playerUnit.displayName || "Unknown Player"
       });
-      
+
       console.log(`Solo player unit killed - required higher attrition threshold (${adjustedAttrition})`);
     } else {
       // Player survives with less than 2 attrition against opponent less than 50% stronger
@@ -593,9 +596,10 @@ export function selectUnitsForCasualties(units, attritionCount) {
       
       playersKilled.push({
         playerId: playerUnit.id,
+        uid: playerUnit.uid,
         displayName: playerUnit.displayName || "Unknown Player"
       });
-      
+
       unitsToRemove.push(playerUnitId);
       remainingAttrition--;
     }
