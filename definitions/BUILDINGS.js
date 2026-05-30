@@ -7,9 +7,9 @@ export const BUILDINGS = {
       icon: "⚒️",
       upgradeTimeMultiplier: 1.2,
       baseRequirements: [
-        { name: 'Wooden Sticks', quantity: 10 },
-        { name: 'Stone Pieces', quantity: 15 },
-        { name: 'Iron Ore', quantity: 5 }
+        { code: 'WOOD', quantity: 10 },
+        { code: 'STONE', quantity: 15 },
+        { code: 'METAL_ORE', quantity: 5 }
       ]
     },
     barracks: {
@@ -18,8 +18,18 @@ export const BUILDINGS = {
       icon: "🛡️",
       upgradeTimeMultiplier: 1.5,
       baseRequirements: [
-        { name: 'Wooden Sticks', quantity: 15 },
-        { name: 'Stone Pieces', quantity: 10 }
+        { code: 'WOOD', quantity: 15 },
+        { code: 'STONE', quantity: 10 }
+      ]
+    },
+    furnace: {
+      name: "Furnace",
+      description: "Smelts metal ore into refined metal. Higher levels smelt faster and unlock advanced alloys.",
+      icon: "🔥",
+      upgradeTimeMultiplier: 1.2,
+      baseRequirements: [
+        { code: 'STONE', quantity: 20 },
+        { code: 'WOOD', quantity: 8 }
       ]
     },
     mine: {
@@ -28,8 +38,8 @@ export const BUILDINGS = {
       icon: "⛏️",
       upgradeTimeMultiplier: 1.3,
       baseRequirements: [
-        { name: 'Wooden Sticks', quantity: 8 },
-        { name: 'Stone Pieces', quantity: 20 }
+        { code: 'WOOD', quantity: 8 },
+        { code: 'STONE', quantity: 20 }
       ]
     },
     wall: {
@@ -38,7 +48,7 @@ export const BUILDINGS = {
       icon: "🧱",
       upgradeTimeMultiplier: 0.8,
       baseRequirements: [
-        { name: 'Stone Pieces', quantity: 25 }
+        { code: 'STONE', quantity: 25 }
       ]
     },
     academy: {
@@ -47,8 +57,8 @@ export const BUILDINGS = {
       icon: "📚",
       upgradeTimeMultiplier: 1.4,
       baseRequirements: [
-        { name: 'Wooden Sticks', quantity: 12 },
-        { name: 'Stone Pieces', quantity: 8 }
+        { code: 'WOOD', quantity: 12 },
+        { code: 'STONE', quantity: 8 }
       ]
     },
     market: {
@@ -57,8 +67,8 @@ export const BUILDINGS = {
       icon: "💰",
       upgradeTimeMultiplier: 1.0,
       baseRequirements: [
-        { name: 'Wooden Sticks', quantity: 15 },
-        { name: 'Stone Pieces', quantity: 5 }
+        { code: 'WOOD', quantity: 15 },
+        { code: 'STONE', quantity: 5 }
       ]
     },
     farm: {
@@ -67,8 +77,8 @@ export const BUILDINGS = {
       icon: "🌾",
       upgradeTimeMultiplier: 0.9,
       baseRequirements: [
-        { name: 'Wooden Sticks', quantity: 10 },
-        { name: 'Seeds', quantity: 5 }
+        { code: 'WOOD', quantity: 10 },
+        { code: 'SEEDS', quantity: 5 }
       ]
     },
     
@@ -80,9 +90,9 @@ export const BUILDINGS = {
       upgradeTimeMultiplier: 1.4,
       waterRequired: true, // This building requires a water tile adjacent
       baseRequirements: [
-        { name: 'Wooden Sticks', quantity: 20 },
-        { name: 'Stone Pieces', quantity: 15 },
-        { name: 'Rope', quantity: 8 }
+        { code: 'WOOD', quantity: 20 },
+        { code: 'STONE', quantity: 15 },
+        { code: 'ROPE', quantity: 8 }
       ]
     },
     
@@ -94,8 +104,8 @@ export const BUILDINGS = {
       upgradeTimeMultiplier: 0.8,
       monster: true,
       baseRequirements: [
-        { name: 'Wooden Sticks', quantity: 5 },
-        { name: 'Stone Pieces', quantity: 3 }
+        { code: 'WOOD', quantity: 5 },
+        { code: 'STONE', quantity: 3 }
       ]
     },
     monster_forge: {
@@ -105,8 +115,8 @@ export const BUILDINGS = {
       upgradeTimeMultiplier: 1.2,
       monster: true,
       baseRequirements: [
-        { name: 'Stone Pieces', quantity: 10 },
-        { name: 'Iron Ore', quantity: 3 }
+        { code: 'STONE', quantity: 10 },
+        { code: 'METAL_ORE', quantity: 3 }
       ]
     },
     monster_totem: {
@@ -116,9 +126,9 @@ export const BUILDINGS = {
       upgradeTimeMultiplier: 1.5,
       monster: true,
       baseRequirements: [
-        { name: 'Wooden Sticks', quantity: 8 },
-        { name: 'Stone Pieces', quantity: 4 },
-        { name: 'Crystal Shard', quantity: 1 }
+        { code: 'WOOD', quantity: 8 },
+        { code: 'STONE', quantity: 4 },
+        { code: 'CRYSTAL_SHARD', quantity: 1 }
       ]
     }
   },
@@ -152,6 +162,22 @@ export const BUILDINGS = {
           name: 'Master Smithing',
           description: 'Allows crafting legendary items',
           unlocks: ['legendary_weapon']
+        }
+      ]
+    },
+    furnace: {
+      2: [
+        {
+          name: 'Improved Smelting',
+          description: 'Smelting completes 10% faster',
+          bonus: { craftingSpeed: 0.1 }
+        }
+      ],
+      3: [
+        {
+          name: 'Advanced Smelting',
+          description: 'Smelting completes 20% faster and unlocks refined alloys',
+          bonus: { craftingSpeed: 0.2 }
         }
       ]
     },
@@ -404,8 +430,8 @@ export const BUILDINGS = {
     const buildingDef = this.types[buildingType];
     if (!buildingDef) {
       // Default resources if building type not found
-      resources.push({ name: 'Wooden Sticks', quantity: Math.floor(10 * levelMultiplier) });
-      resources.push({ name: 'Stone Pieces', quantity: Math.floor(8 * levelMultiplier) });
+      resources.push({ code: 'WOOD', quantity: Math.floor(10 * levelMultiplier) });
+      resources.push({ code: 'STONE', quantity: Math.floor(8 * levelMultiplier) });
       return resources;
     }
     
@@ -413,7 +439,7 @@ export const BUILDINGS = {
     if (buildingDef.baseRequirements) {
       for (const req of buildingDef.baseRequirements) {
         resources.push({
-          name: req.name,
+          code: req.code,
           quantity: Math.floor(req.quantity * levelMultiplier / 1.5) // Adjust by level but account for base being level 1
         });
       }
@@ -423,65 +449,65 @@ export const BUILDINGS = {
     switch (buildingType) {
       case 'smithy':
         if (currentLevel >= 3) {
-          resources.push({ name: 'Coal', quantity: Math.floor(3 * levelMultiplier) });
+          resources.push({ code: 'COAL', quantity: Math.floor(3 * levelMultiplier) });
         }
         break;
         
       case 'barracks':
         if (currentLevel >= 3) {
-          resources.push({ name: 'Leather', quantity: Math.floor(2 * levelMultiplier) });
+          resources.push({ code: 'LEATHER', quantity: Math.floor(2 * levelMultiplier) });
         }
         break;
         
       case 'mine':
         // Extra stone for mines
-        resources.push({ name: 'Stone Pieces', quantity: Math.floor(5 * levelMultiplier) });
+        resources.push({ code: 'STONE', quantity: Math.floor(5 * levelMultiplier) });
         break;
         
       case 'wall':
         // Walls need more stone
-        resources.push({ name: 'Stone Pieces', quantity: Math.floor(10 * levelMultiplier) });
+        resources.push({ code: 'STONE', quantity: Math.floor(10 * levelMultiplier) });
         if (currentLevel >= 3) {
-          resources.push({ name: 'Iron Ore', quantity: Math.floor(3 * levelMultiplier) });
+          resources.push({ code: 'METAL_ORE', quantity: Math.floor(3 * levelMultiplier) });
         }
         break;
         
       case 'academy':
-        resources.push({ name: 'Paper', quantity: Math.floor(3 * levelMultiplier) });
+        resources.push({ code: 'PAPER', quantity: Math.floor(3 * levelMultiplier) });
         if (currentLevel >= 2) {
-          resources.push({ name: 'Crystal Shard', quantity: currentLevel - 1 });
+          resources.push({ code: 'CRYSTAL_SHARD', quantity: currentLevel - 1 });
         }
         break;
         
       case 'market':
         // Extra wood for market stalls
-        resources.push({ name: 'Wooden Sticks', quantity: Math.floor(5 * levelMultiplier) });
-        resources.push({ name: 'Cloth', quantity: Math.floor(3 * levelMultiplier) });
+        resources.push({ code: 'WOOD', quantity: Math.floor(5 * levelMultiplier) });
+        resources.push({ code: 'CLOTH', quantity: Math.floor(3 * levelMultiplier) });
         break;
         
       case 'farm':
-        resources.push({ name: 'Seeds', quantity: Math.floor(5 * levelMultiplier) });
+        resources.push({ code: 'SEEDS', quantity: Math.floor(5 * levelMultiplier) });
         if (currentLevel >= 2) {
-          resources.push({ name: 'Water', quantity: Math.floor(2 * levelMultiplier) });
+          resources.push({ code: 'WATER', quantity: Math.floor(2 * levelMultiplier) });
         }
         break;
         
       case 'harbor':
         // Extra wood and rope for harbor construction
-        resources.push({ name: 'Wooden Sticks', quantity: Math.floor(8 * levelMultiplier) });
-        resources.push({ name: 'Rope', quantity: Math.floor(4 * levelMultiplier) });
+        resources.push({ code: 'WOOD', quantity: Math.floor(8 * levelMultiplier) });
+        resources.push({ code: 'ROPE', quantity: Math.floor(4 * levelMultiplier) });
         if (currentLevel >= 2) {
-          resources.push({ name: 'Canvas', quantity: Math.floor(3 * levelMultiplier) });
+          resources.push({ code: 'CANVAS', quantity: Math.floor(3 * levelMultiplier) });
         }
         if (currentLevel >= 3) {
-          resources.push({ name: 'Iron Ore', quantity: Math.floor(5 * levelMultiplier) });
+          resources.push({ code: 'METAL_ORE', quantity: Math.floor(5 * levelMultiplier) });
         }
         break;
     }
     
     // Higher level buildings need special resources
     if (currentLevel >= 4) {
-      resources.push({ name: 'Crystal Shard', quantity: 1 });
+      resources.push({ code: 'CRYSTAL_SHARD', quantity: 1 });
     }
     
     return resources;

@@ -17,15 +17,15 @@ export function getItemCategories() {
 
 export const ITEMS = {
   // Common resources (gathered items)
-  WOODEN_STICKS: {
-    name: 'Wooden Sticks',
+  WOOD: {
+    name: 'Wood',
     type: 'resource',
     rarity: 'common',
     description: 'Basic building material found in most areas',
     biomes: ['plains', 'forest', 'mountains', 'desert', 'rivers', 'oasis', 'ruins', 'wastes']
   },
-  STONE_PIECES: {
-    name: 'Stone Pieces',
+  STONE: {
+    name: 'Stone',
     type: 'resource',
     rarity: 'common',
     description: 'Small rocks useful for crafting tools',
@@ -50,7 +50,7 @@ export const ITEMS = {
     stats: { attack: 2 },
     recipe: {
       materials: {
-        WOODEN_STICKS: 5
+        WOOD: 5
       },
       ticksRequired: 6,
       category: 'weapon',
@@ -68,8 +68,8 @@ export const ITEMS = {
     stats: { attack: 5 },
     recipe: {
       materials: {
-        WOODEN_STICKS: 2,
-        STONE_PIECES: 5
+        WOOD: 2,
+        STONE: 5
       },
       ticksRequired: 12,
       category: 'weapon',
@@ -88,167 +88,20 @@ export const ITEMS = {
     rarity: 'uncommon',
     description: 'Magical shard used for enchantments'
   },
-    // Craftable items
-    IRON_ORE: {
-      name: 'Iron Ore',
-      type: 'resource',
-      rarity: 'uncommon',
-      description: 'Metal-bearing rock found in mountains',
-      biomes: ['mountains']
-    },
-    MOUNTAIN_CRYSTAL: {
-      name: 'Mountain Crystal',
-      type: 'gem',
-      rarity: 'rare',
-      description: 'Beautiful crystal formed deep within mountains',
-      biomes: ['mountains']
-    },
-  
-    // Desert items
-    SAND_CRYSTAL: {
-      name: 'Sand Crystal',
-      type: 'gem',
-      rarity: 'uncommon',
-      description: 'Formed from heated desert sands',
-      biomes: ['desert']
-    },
-    CACTUS_FRUIT: {
-      name: 'Cactus Fruit',
-      type: 'resource',
-      rarity: 'common',
-      description: 'Juicy fruit that grows on desert cacti',
-      biomes: ['desert']
-    },
-  
-    // River items
-    FRESH_WATER: {
-      name: 'Fresh Water',
-      type: 'resource',
-      rarity: 'common',
-      description: 'Clean water from flowing rivers',
-      biomes: ['rivers']
-    },
-    FISH: {
-      name: 'Fish',
-      type: 'resource',
-      rarity: 'common',
-      description: 'Freshwater fish from rivers and lakes',
-      biomes: ['rivers']
-    },
-  
-    // Oasis items
-    PURE_WATER: {
-      name: 'Pure Water',
-      type: 'resource',
-      rarity: 'uncommon',
-      description: 'Exceptionally clean water from oasis springs',
-      biomes: ['oasis']
-    },
-    EXOTIC_FRUIT: {
-      name: 'Exotic Fruit',
-      type: 'resource',
-      rarity: 'uncommon',
-      description: 'Rare fruits growing around water sources in dry areas',
-      biomes: ['oasis']
-    },
-  
-    // Ruins items
-    ANCIENT_FRAGMENT: {
-      name: 'Ancient Fragment',
-      type: 'artifact',
-      rarity: 'rare',
-      description: 'Piece of a forgotten civilization',
-      biomes: ['ruins']
-    },
-    BROKEN_TOOL: {
-      name: 'Broken Tool',
-      type: 'junk',
-      rarity: 'common',
-      description: 'Damaged tool from a bygone era',
-      biomes: ['ruins']
-    },
-  
-    // Wasteland items
-    SCRAP_METAL: {
-      name: 'Scrap Metal',
-      type: 'resource',
-      rarity: 'common',
-      description: 'Salvageable metal pieces',
-      biomes: ['wastes']
-    },
-    STRANGE_DEVICE: {
-      name: 'Strange Device',
-      type: 'artifact',
-      rarity: 'uncommon',
-      description: 'Peculiar machinery with unknown purpose',
-      biomes: ['wastes']
-    },
-  
-    // New monster drop items
-    BONE_FRAGMENT: {
-      name: 'Bone Fragment',
-      type: 'resource',
-      rarity: 'common',
-      description: 'A fragment of bone from a defeated monster',
-      monsterDrop: true
-    },
-    CRUDE_WEAPON: {
-      name: 'Crude Weapon',
-      type: 'weapon',
-      rarity: 'common',
-      description: 'A simple weapon dropped by a monster',
-      power: 3, // Battle power contribution
-      monsterDrop: true
-    },
-    MONSTER_HIDE: {
-      name: 'Monster Hide',
-      type: 'resource',
-      rarity: 'uncommon',
-      description: 'Tough hide from a monster',
-      monsterDrop: true
-    },
-    ANCIENT_COIN: {
-      name: 'Ancient Coin',
-      type: 'treasure',
-      rarity: 'uncommon',
-      description: 'Old coin from a forgotten civilization',
-      monsterDrop: true
-    },
-    MONSTER_TOOTH: {
-      name: 'Monster Tooth',
-      type: 'trophy',
-      rarity: 'uncommon',
-      description: 'Sharp tooth taken from a slain creature',
-      power: 2, // Battle power contribution
-      monsterDrop: true
-    },
-    MONSTER_BLOOD: {
-      name: 'Monster Blood',
-      type: 'alchemy',
-      rarity: 'rare',
-      description: 'Unusual blood with magical properties',
-      monsterDrop: true
-    },
-    RARE_METALS: {
-      name: 'Rare Metals',
-      type: 'resource',
-      rarity: 'rare',
-      description: 'Uncommon metal fragments with special properties',
-      monsterDrop: true
-    },
-    PRIMAL_ESSENCE: {
-      name: 'Primal Essence',
-      type: 'gem',
-      rarity: 'epic',
-      description: 'Crystallized magical energy from a powerful creature',
-      power: 15, // Battle power contribution
-      monsterDrop: true
-    },
-  IRON: {
-    name: 'Iron',
+  METAL: {
+    name: 'Metal',
     type: 'resource',
     rarity: 'common',
-    description: 'Strong metal used for weapons and tools'
+    description: 'Strong metal used for weapons and tools',
+    // Smelted from raw ore at a furnace. Surfaced as a craftable via getAllRecipes.
+    recipe: {
+      materials: { METAL_ORE: 2 },
+      ticksRequired: 8,
+      category: 'material',
+      requiredLevel: 1,
+      requiredBuilding: { type: 'furnace', level: 1 },
+      quantity: 1
+    }
   },
   IRON_SWORD: {
     name: 'Iron Sword',
@@ -260,8 +113,8 @@ export const ITEMS = {
     stats: { attack: 10 },
     recipe: {
       materials: {
-        WOODEN_STICKS: 2,
-        IRON_ORE: 3
+        WOOD: 2,
+        METAL_ORE: 3
       },
       ticksRequired: 18,
       category: 'weapon',
@@ -310,14 +163,18 @@ export const ITEMS = {
     type: 'resource',
     rarity: 'common',
     description: 'Grain that grows in open grasslands',
-    biomes: ['plains']
+    biomes: ['plains'],
+    food: true,
+    nourishment: 2
   },
   WILD_BERRIES: {
     name: 'Wild Berries',
     type: 'resource',
     rarity: 'common',
     description: 'Edible berries found in meadows',
-    biomes: ['plains', 'forest']
+    biomes: ['plains', 'forest'],
+    food: true,
+    nourishment: 1
   },
   
   // Forest items
@@ -337,8 +194,8 @@ export const ITEMS = {
   },
   
   // Mountain items
-  IRON_ORE: {
-    name: 'Iron Ore',
+  METAL_ORE: {
+    name: 'Metal Ore',
     type: 'resource',
     rarity: 'uncommon',
     description: 'Metal-bearing rock found in mountains',
@@ -365,7 +222,9 @@ export const ITEMS = {
     type: 'resource',
     rarity: 'common',
     description: 'Juicy fruit that grows on desert cacti',
-    biomes: ['desert']
+    biomes: ['desert'],
+    food: true,
+    nourishment: 2
   },
   
   // River items
@@ -381,7 +240,9 @@ export const ITEMS = {
     type: 'resource',
     rarity: 'common',
     description: 'Freshwater fish from rivers and lakes',
-    biomes: ['rivers']
+    biomes: ['rivers'],
+    food: true,
+    nourishment: 4
   },
   
   // Oasis items
@@ -397,7 +258,9 @@ export const ITEMS = {
     type: 'resource',
     rarity: 'uncommon',
     description: 'Rare fruits growing around water sources in dry areas',
-    biomes: ['oasis']
+    biomes: ['oasis'],
+    food: true,
+    nourishment: 3
   },
   
   // Ruins items
@@ -673,7 +536,7 @@ export const ITEMS = {
     power: 3,
     equipSlot: 'shield',
     stats: { defense: 3 },
-    recipe: { materials: { WOODEN_STICKS: 8 }, ticksRequired: 8, category: 'armor', requiredLevel: 1 }
+    recipe: { materials: { WOOD: 8 }, ticksRequired: 8, category: 'armor', requiredLevel: 1 }
   },
   IRON_HELMET: {
     name: 'Iron Helmet',
@@ -684,7 +547,7 @@ export const ITEMS = {
     equipSlot: 'helmet',
     stats: { defense: 4 },
     recipe: {
-      materials: { IRON_ORE: 4, WOODEN_STICKS: 1 }, ticksRequired: 14, category: 'armor',
+      materials: { METAL_ORE: 4, WOOD: 1 }, ticksRequired: 14, category: 'armor',
       requiredLevel: 2, requiredBuilding: { type: 'smithy', level: 1 }
     }
   },
@@ -697,7 +560,7 @@ export const ITEMS = {
     equipSlot: 'torso',
     stats: { defense: 6 },
     recipe: {
-      materials: { IRON_ORE: 8 }, ticksRequired: 20, category: 'armor',
+      materials: { METAL_ORE: 8 }, ticksRequired: 20, category: 'armor',
       requiredLevel: 3, requiredBuilding: { type: 'smithy', level: 2 }
     }
   },
@@ -710,7 +573,7 @@ export const ITEMS = {
     equipSlot: 'shield',
     stats: { defense: 7 },
     recipe: {
-      materials: { IRON_ORE: 5 }, ticksRequired: 14, category: 'armor',
+      materials: { METAL_ORE: 5 }, ticksRequired: 14, category: 'armor',
       requiredLevel: 2, requiredBuilding: { type: 'smithy', level: 1 }
     }
   },
@@ -739,8 +602,8 @@ export const ITEMS = {
 // Monster drop items organized by rarity tiers
 export const MONSTER_DROPS = {
   common: [
-    { id: "WOODEN_STICKS", quantityRange: [1, 5] },
-    { id: "STONE_PIECES", quantityRange: [1, 4] },
+    { id: "WOOD", quantityRange: [1, 5] },
+    { id: "STONE", quantityRange: [1, 4] },
     { id: "BONE_FRAGMENT", quantityRange: [1, 3] },
     { id: "CRUDE_WEAPON", quantityRange: [1, 1] }
   ],
@@ -828,8 +691,56 @@ export function getBiomeItems(biomeName) {
   return biomeItems;
 }
 
+// Resources that can be gathered on a tile of the given biome — the deterministic
+// list (no random quantities), used to preview what an empty tile offers.
+export function getGatherableItems(biomeName) {
+  if (!biomeName) return [];
+  return Object.entries(ITEMS)
+    .filter(([, item]) => Array.isArray(item.biomes) && item.biomes.includes(biomeName))
+    .map(([code, item]) => ({ code, name: item.name, rarity: item.rarity, type: item.type, food: !!item.food }));
+}
+
 // New helper function to get item power contribution
 export function getItemPower(itemId) {
   const item = ITEMS[itemId];
   return item && item.power ? item.power : 0;
+}
+
+// ---------------------------------------------------------------------------
+// Food / nourishment
+// ---------------------------------------------------------------------------
+// Edible items carry `food: true` and a `nourishment` value — how many units of
+// hunger one item satisfies. Higher nourishment = more filling. Used by the
+// starvation/upkeep logic and the resource HUD's food readout.
+
+export const FOOD_ITEMS = Object.keys(ITEMS).filter(code => ITEMS[code]?.food);
+
+export function isFood(code) {
+  return !!ITEMS[code]?.food;
+}
+
+// Nourishment per single unit of an item (0 for non-food).
+export function getNourishment(code) {
+  const item = ITEMS[code];
+  return item?.food ? (item.nourishment ?? 1) : 0;
+}
+
+// Total nourishment available in an items bag ({ CODE: qty, ... }).
+export function totalNourishment(items = {}) {
+  let total = 0;
+  for (const [code, qty] of Object.entries(items)) {
+    if (code.startsWith('_')) continue; // skip metadata like _x/_y
+    total += getNourishment(code) * (Number(qty) || 0);
+  }
+  return total;
+}
+
+// Total count of food units in an items bag (ignores nourishment weighting).
+export function totalFoodQuantity(items = {}) {
+  let total = 0;
+  for (const [code, qty] of Object.entries(items)) {
+    if (code.startsWith('_')) continue;
+    if (isFood(code)) total += (Number(qty) || 0);
+  }
+  return total;
 }

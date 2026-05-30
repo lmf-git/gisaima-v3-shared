@@ -21,7 +21,7 @@ const UNITS = {
         carryCapacity: 5,
         timePerUnit: 1.1,
         icon: 'sword',
-        cost: { WOODEN_STICKS: 2, IRON_SHARDS: 1 },
+        cost: { WOOD: 2, IRON_SHARDS: 1 },
         recruitment: {
         sortOrder: 11,
         tooltip: "Sturdy and disciplined"
@@ -37,7 +37,7 @@ const UNITS = {
         carryCapacity: 10,
         timePerUnit: 0.75,
         icon: 'boots',
-        cost: { WOODEN_STICKS: 1, LEATHER: 2 },
+        cost: { WOOD: 1, LEATHER: 2 },
         requirements: {
         structureLevel: 1
         },
@@ -56,7 +56,7 @@ const UNITS = {
         carryCapacity: 6,
         timePerUnit: 0.9,
         icon: 'axe',
-        cost: { WOODEN_STICKS: 1, BONE: 2 },
+        cost: { WOOD: 1, BONE: 2 },
         recruitment: {
         sortOrder: 12,
         tooltip: "Cheap and fierce"
@@ -91,7 +91,7 @@ const UNITS = {
         carryCapacity: 7,
         timePerUnit: 1.2,
         icon: 'blades',
-        cost: { WOODEN_STICKS: 2, MOON_SILVER: 1 },
+        cost: { WOOD: 2, MOON_SILVER: 1 },
         recruitment: {
         sortOrder: 13,
         tooltip: "Fast, elegant melee unit"
@@ -107,7 +107,7 @@ const UNITS = {
         carryCapacity: 10,
         timePerUnit: 0.8,
         icon: 'eye',
-        cost: { FEATHER: 1, WOODEN_STICKS: 2 },
+        cost: { FEATHER: 1, WOOD: 2 },
         requirements: {
         structureLevel: 1
         },
@@ -161,7 +161,7 @@ const UNITS = {
         carryCapacity: 5,
         timePerUnit: 1.3,
         icon: 'hammer',
-        cost: { STONE_PIECES: 2, IRON_SHARDS: 2 },
+        cost: { STONE: 2, IRON_SHARDS: 2 },
         recruitment: {
         sortOrder: 15,
         tooltip: "Tough and slow defender"
@@ -177,7 +177,7 @@ const UNITS = {
         carryCapacity: 8,
         timePerUnit: 0.85,
         icon: 'pick',
-        cost: { STONE_PIECES: 1, TORCH: 1 },
+        cost: { STONE: 1, TORCH: 1 },
         requirements: {
         structureLevel: 1
         },
@@ -228,7 +228,7 @@ const UNITS = {
         carryCapacity: 12,
         timePerUnit: 2,
         icon: 'gear',
-        cost: { IRON_SHARDS: 3, WOODEN_STICKS: 3 },
+        cost: { IRON_SHARDS: 3, WOOD: 3 },
         recruitment: {
         sortOrder: 40,
         tooltip: "Essential for breaching defenses"
@@ -247,7 +247,7 @@ const UNITS = {
         timePerUnit: 1.5,
         icon: 'shield',
         race: 'human',
-        cost: { WOODEN_STICKS: 1, STONE_PIECES: 2, IRON: 1 },
+        cost: { WOOD: 1, STONE: 2, METAL: 1 },
         requirements: {
             structureLevel: 2,
             race: 'human',
@@ -272,7 +272,7 @@ const UNITS = {
         timePerUnit: 1.25,
         icon: 'bow',
         race: 'elf',
-        cost: { WOODEN_STICKS: 3, LEATHER: 1 },
+        cost: { WOOD: 3, LEATHER: 1 },
         requirements: {
             structureLevel: 2,
             race: 'elf',
@@ -296,7 +296,7 @@ const UNITS = {
         timePerUnit: 1.5,
         icon: 'shield',
         race: 'dwarf',
-        cost: { STONE_PIECES: 2, IRON: 2 },
+        cost: { STONE: 2, METAL: 2 },
         requirements: {
             structureLevel: 2,
             race: 'dwarf',
@@ -320,7 +320,7 @@ const UNITS = {
         timePerUnit: 0.5,
         icon: 'sword',
         race: 'goblin',
-        cost: { WOODEN_STICKS: 1 },
+        cost: { WOOD: 1 },
         requirements: {
             structureLevel: 2,
             race: 'goblin'
@@ -368,7 +368,7 @@ const UNITS = {
         carryCapacity: 4,
         timePerUnit: 2,
         icon: 'shield',
-        cost: { WOODEN_STICKS: 2, STONE_PIECES: 2, IRON: 2 },
+        cost: { WOOD: 2, STONE: 2, METAL: 2 },
         requirements: {
             structureType: ['fortress', 'stronghold', 'watchtower'],
             structureLevel: 2,
@@ -391,7 +391,7 @@ const UNITS = {
         carryCapacity: 2,
         timePerUnit: 3,
         icon: 'shield',
-        cost: { WOODEN_STICKS: 5, STONE_PIECES: 3, IRON: 2 },
+        cost: { WOOD: 5, STONE: 3, METAL: 2 },
         requirements: {
             structureType: ['fortress', 'stronghold', 'workshop'],
             structureLevel: 3,
@@ -417,7 +417,7 @@ const UNITS = {
         carryCapacity: 12,
         timePerUnit: 2,
         icon: 'hammer',
-        cost: { WOODEN_STICKS: 3, STONE_PIECES: 3, IRON: 1 },
+        cost: { WOOD: 3, STONE: 3, METAL: 1 },
         requirements: {
             structureType: ['workshop', 'storage'],
             structureLevel: 2,
@@ -442,7 +442,7 @@ const UNITS = {
         carryCapacity: 20,
         timePerUnit: 1.5,
         icon: 'pickaxe',
-        cost: { WOODEN_STICKS: 2, tools: 1 },
+        cost: { WOOD: 2, tools: 1 },
         requirements: {
             structureType: ['storage'],
             structureLevel: 1,
@@ -467,7 +467,7 @@ const UNITS = {
         timePerUnit: 1.0,
         icon: 'raft',
         motion: ['water'], // Can only traverse water
-        cost: { WOODEN_STICKS: 8, VINE: 4 },
+        cost: { WOOD: 8, VINE: 4 },
         requirements: {
             structureLevel: 1
         },
@@ -487,7 +487,7 @@ const UNITS = {
         timePerUnit: 1.5,
         icon: 'boat',
         motion: ['water'],
-        cost: { WOODEN_STICKS: 15, LEATHER: 5, ROPE: 3 },
+        cost: { WOOD: 15, LEATHER: 5, ROPE: 3 },
         requirements: {
             structureLevel: 2,
             buildingType: 'harbor',
@@ -510,7 +510,7 @@ const UNITS = {
         timePerUnit: 2.5,
         icon: 'ship',
         motion: ['water'],
-        cost: { WOODEN_STICKS: 25, IRON_SHARDS: 10, ROPE: 8, CANVAS: 5 },
+        cost: { WOOD: 25, IRON_SHARDS: 10, ROPE: 8, CANVAS: 5 },
         requirements: {
             structureLevel: 3,
             buildingType: 'harbor',
@@ -533,7 +533,7 @@ const UNITS = {
         timePerUnit: 2.0,
         icon: 'warship',
         motion: ['water'],
-        cost: { WOODEN_STICKS: 15, IRON_SHARDS: 8, BONE: 5 },
+        cost: { WOOD: 15, IRON_SHARDS: 8, BONE: 5 },
         requirements: {
             structureLevel: 2,
             buildingType: 'harbor',
@@ -559,7 +559,7 @@ const UNITS = {
         timePerUnit: 3.0,
         icon: 'steamship',
         motion: ['water'],
-        cost: { WOODEN_STICKS: 20, IRON: 15, COAL: 10, GEAR: 5 },
+        cost: { WOOD: 20, METAL: 15, COAL: 10, GEAR: 5 },
         requirements: {
             structureLevel: 3,
             buildingType: 'harbor',
@@ -584,7 +584,7 @@ const UNITS = {
         timePerUnit: 2.0,
         icon: 'explorership',
         motion: ['water'],
-        cost: { WOODEN_STICKS: 18, CANVAS: 6, TELESCOPE: 1 },
+        cost: { WOOD: 18, CANVAS: 6, TELESCOPE: 1 },
         requirements: {
             structureLevel: 2,
             buildingType: 'harbor',
@@ -612,7 +612,7 @@ const UNITS = {
         timePerUnit: 2.0,
         icon: 'swanship',
         motion: ['water'],
-        cost: { WOODEN_STICKS: 15, MOON_SILVER: 5, GLOW_DUST: 3 },
+        cost: { WOOD: 15, MOON_SILVER: 5, GLOW_DUST: 3 },
         requirements: {
             structureLevel: 2,
             race: 'elf',
@@ -636,7 +636,7 @@ const UNITS = {
         timePerUnit: 3.0,
         icon: 'ironship',
         motion: ['water'],
-        cost: { IRON: 20, STONE_PIECES: 15, COAL: 8 },
+        cost: { METAL: 20, STONE: 15, COAL: 8 },
         requirements: {
             structureLevel: 2,
             race: 'dwarf',
@@ -687,7 +687,7 @@ const UNITS = {
         meleeDefense: 1, rangedDefense: 1, magicDefense: 0.5,
         speed: 1.2,
         motion: ['ground'],
-        possibleItems: ['Wooden Sticks', 'Stolen Goods', 'Crude Weapon'],
+        possibleItems: ['Wood', 'Stolen Goods', 'Crude Weapon'],
         biomePreference: ['plains', 'forest'],
         personalityPreferences: ['SNEAKY', 'CAUTIOUS']
     },

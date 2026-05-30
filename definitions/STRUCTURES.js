@@ -7,8 +7,8 @@ export const STRUCTURES = {
     capacity: 50,
     buildTime: 0,
     requiredResources: [
-      { id: 'WOODEN_STICKS', quantity: 8 },
-      { id: 'STONE_PIECES', quantity: 6 }
+      { id: 'WOOD', quantity: 8 },
+      { id: 'STONE', quantity: 6 }
     ],
     features: [
       {
@@ -28,8 +28,8 @@ export const STRUCTURES = {
     description: "A basic monster dwelling",
     type: "monster_lair",
     requiredResources: [
-      { id: 'WOODEN_STICKS', quantity: 8 },
-      { id: 'STONE_PIECES', quantity: 6 }
+      { id: 'WOOD', quantity: 8 },
+      { id: 'STONE', quantity: 6 }
     ],
     buildTime: 1,
     capacity: 10,
@@ -53,8 +53,8 @@ export const STRUCTURES = {
     description: "A fortified monster stronghold",
     type: "monster_fortress",
     requiredResources: [
-      { id: 'WOODEN_STICKS', quantity: 15 },
-      { id: 'STONE_PIECES', quantity: 12 },
+      { id: 'WOOD', quantity: 15 },
+      { id: 'STONE', quantity: 12 },
       { id: 'MONSTER_HIDE', quantity: 5 }
     ],
     buildTime: 2,
@@ -84,8 +84,8 @@ export const STRUCTURES = {
     description: "A place where monsters are born",
     type: "monster_hive",
     requiredResources: [
-      { id: 'WOODEN_STICKS', quantity: 10 },
-      { id: 'STONE_PIECES', quantity: 8 },
+      { id: 'WOOD', quantity: 10 },
+      { id: 'STONE', quantity: 8 },
       { id: 'MONSTER_BLOOD', quantity: 3 }
     ],
     buildTime: 1,
@@ -110,8 +110,8 @@ export const STRUCTURES = {
     description: "A hidden place for monsters to rest",
     type: "monster_den",
     requiredResources: [
-      { id: 'WOODEN_STICKS', quantity: 12 },
-      { id: 'STONE_PIECES', quantity: 8 },
+      { id: 'WOOD', quantity: 12 },
+      { id: 'STONE', quantity: 8 },
       { id: 'BONE_FRAGMENT', quantity: 4 }
     ],
     buildTime: 1,
@@ -140,8 +140,8 @@ export const STRUCTURES = {
       defense: 1
     },
     requiredResources: [
-      { id: 'WOODEN_STICKS', quantity: 5 },
-      { id: 'STONE_PIECES', quantity: 3 }
+      { id: 'WOOD', quantity: 5 },
+      { id: 'STONE', quantity: 3 }
     ],
     buildTime: 2,
     features: [
@@ -163,8 +163,8 @@ export const STRUCTURES = {
       detection: 2
     },
     requiredResources: [
-      { id: 'WOODEN_STICKS', quantity: 8 },
-      { id: 'STONE_PIECES', quantity: 5 }
+      { id: 'WOOD', quantity: 8 },
+      { id: 'STONE', quantity: 5 }
     ],
     buildTime: 3,
     features: [
@@ -183,8 +183,8 @@ export const STRUCTURES = {
     durability: 80,
     capacity: 10,
     requiredResources: [
-      { id: 'WOODEN_STICKS', quantity: 6 },
-      { id: 'STONE_PIECES', quantity: 2 },
+      { id: 'WOOD', quantity: 6 },
+      { id: 'STONE', quantity: 2 },
       { id: 'MEDICINAL_HERBS', quantity: 4 } // Changed from "Fiber" to existing MEDICINAL_HERBS
     ],
     buildTime: 2,
@@ -204,9 +204,9 @@ export const STRUCTURES = {
     durability: 120,
     craftingSpeed: 1.5,
     requiredResources: [
-      { id: 'WOODEN_STICKS', quantity: 10 },
-      { id: 'STONE_PIECES', quantity: 8 },
-      { id: 'IRON_ORE', quantity: 3 } // Changed from "Metal" to specific IRON_ORE
+      { id: 'WOOD', quantity: 10 },
+      { id: 'STONE', quantity: 8 },
+      { id: 'METAL_ORE', quantity: 3 } // Changed from "Metal" to specific METAL_ORE
     ],
     buildTime: 5,
     features: [
@@ -229,9 +229,9 @@ export const STRUCTURES = {
       detection: 1
     },
     requiredResources: [
-      { id: 'WOODEN_STICKS', quantity: 12 },
-      { id: 'STONE_PIECES', quantity: 8 },
-      { id: 'IRON_ORE', quantity: 4 }
+      { id: 'WOOD', quantity: 12 },
+      { id: 'STONE', quantity: 8 },
+      { id: 'METAL_ORE', quantity: 4 }
     ],
     buildTime: 4,
     capacity: 8,
