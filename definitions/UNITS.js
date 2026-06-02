@@ -21,7 +21,7 @@ const UNITS = {
         carryCapacity: 5,
         timePerUnit: 1.1,
         icon: 'sword',
-        cost: { WOOD: 2, IRON_SHARDS: 1 },
+        cost: { WOOD: 2, METAL_ORE: 1 },
         recruitment: {
         sortOrder: 11,
         tooltip: "Sturdy and disciplined"
@@ -91,7 +91,7 @@ const UNITS = {
         carryCapacity: 7,
         timePerUnit: 1.2,
         icon: 'blades',
-        cost: { WOOD: 2, MOON_SILVER: 1 },
+        cost: { WOOD: 2, CRYSTAL: 1 },
         recruitment: {
         sortOrder: 13,
         tooltip: "Fast, elegant melee unit"
@@ -107,7 +107,7 @@ const UNITS = {
         carryCapacity: 10,
         timePerUnit: 0.8,
         icon: 'eye',
-        cost: { FEATHER: 1, WOOD: 2 },
+        cost: { LEATHER: 1, WOOD: 2 },
         requirements: {
         structureLevel: 1
         },
@@ -126,7 +126,7 @@ const UNITS = {
         carryCapacity: 5,
         timePerUnit: 0.8,
         icon: 'thorn',
-        cost: { GLOW_DUST: 2, PETAL: 2 },
+        cost: { CRYSTAL: 2, HERBS: 2 },
         recruitment: {
         sortOrder: 14,
         tooltip: "Magic-resistant tiny tank"
@@ -142,7 +142,7 @@ const UNITS = {
         carryCapacity: 8,
         timePerUnit: 0.5,
         icon: 'wing',
-        cost: { GLOW_DUST: 1, FEATHER: 2 },
+        cost: { CRYSTAL: 1, LEATHER: 2 },
         requirements: {
         structureLevel: 1
         },
@@ -161,7 +161,7 @@ const UNITS = {
         carryCapacity: 5,
         timePerUnit: 1.3,
         icon: 'hammer',
-        cost: { STONE: 2, IRON_SHARDS: 2 },
+        cost: { STONE: 2, METAL_ORE: 2 },
         recruitment: {
         sortOrder: 15,
         tooltip: "Tough and slow defender"
@@ -177,7 +177,7 @@ const UNITS = {
         carryCapacity: 8,
         timePerUnit: 0.85,
         icon: 'pick',
-        cost: { STONE: 1, TORCH: 1 },
+        cost: { STONE: 1, COAL: 1 },
         requirements: {
         structureLevel: 1
         },
@@ -196,7 +196,7 @@ const UNITS = {
         carryCapacity: 8,
         timePerUnit: 1.2,
         icon: 'cross',
-        cost: { HERB: 2, WATER: 1 },
+        cost: { HERBS: 2, FRESH_WATER: 1 },
         recruitment: {
         sortOrder: 30,
         tooltip: "Restores nearby units slowly"
@@ -212,7 +212,7 @@ const UNITS = {
         carryCapacity: 8,
         timePerUnit: 1.5,
         icon: 'staff',
-        cost: { HERB: 1, BONE: 1, GLOW_DUST: 1 },
+        cost: { HERBS: 1, BONE: 1, CRYSTAL: 1 },
         recruitment: {
         sortOrder: 31,
         tooltip: "Magic support unit"
@@ -228,7 +228,7 @@ const UNITS = {
         carryCapacity: 12,
         timePerUnit: 2,
         icon: 'gear',
-        cost: { IRON_SHARDS: 3, WOOD: 3 },
+        cost: { METAL_ORE: 3, WOOD: 3 },
         recruitment: {
         sortOrder: 40,
         tooltip: "Essential for breaching defenses"
@@ -342,7 +342,7 @@ const UNITS = {
         timePerUnit: 1,
         icon: 'staff',
         race: 'fairy',
-        cost: { herbs: 2, crystal: 1 },
+        cost: { HERBS: 2, CRYSTAL: 1 },
         requirements: {
             structureLevel: 2,
             race: 'fairy',
@@ -442,7 +442,7 @@ const UNITS = {
         carryCapacity: 20,
         timePerUnit: 1.5,
         icon: 'pickaxe',
-        cost: { WOOD: 2, tools: 1 },
+        cost: { WOOD: 2, METAL_ORE: 1 },
         requirements: {
             structureType: ['storage'],
             structureLevel: 1,
@@ -467,7 +467,7 @@ const UNITS = {
         timePerUnit: 1.0,
         icon: 'raft',
         motion: ['water'], // Can only traverse water
-        cost: { WOOD: 8, VINE: 4 },
+        cost: { WOOD: 8, ROPE: 4 },
         requirements: {
             structureLevel: 1
         },
@@ -510,7 +510,7 @@ const UNITS = {
         timePerUnit: 2.5,
         icon: 'ship',
         motion: ['water'],
-        cost: { WOOD: 25, IRON_SHARDS: 10, ROPE: 8, CANVAS: 5 },
+        cost: { WOOD: 25, METAL_ORE: 10, ROPE: 8, LEATHER: 5 },
         requirements: {
             structureLevel: 3,
             buildingType: 'harbor',
@@ -533,7 +533,7 @@ const UNITS = {
         timePerUnit: 2.0,
         icon: 'warship',
         motion: ['water'],
-        cost: { WOOD: 15, IRON_SHARDS: 8, BONE: 5 },
+        cost: { WOOD: 15, METAL_ORE: 8, BONE: 5 },
         requirements: {
             structureLevel: 2,
             buildingType: 'harbor',
@@ -559,7 +559,7 @@ const UNITS = {
         timePerUnit: 2.0,
         icon: 'explorership',
         motion: ['water'],
-        cost: { WOOD: 18, CANVAS: 6, TELESCOPE: 1 },
+        cost: { WOOD: 18, ROPE: 6, CRYSTAL: 1 },
         requirements: {
             structureLevel: 2,
             buildingType: 'harbor',
@@ -587,7 +587,7 @@ const UNITS = {
         timePerUnit: 2.0,
         icon: 'swanship',
         motion: ['water'],
-        cost: { WOOD: 15, MOON_SILVER: 5, GLOW_DUST: 3 },
+        cost: { WOOD: 15, CRYSTAL: 8 },
         requirements: {
             structureLevel: 2,
             race: 'elf',
@@ -637,7 +637,7 @@ const UNITS = {
         timePerUnit: 1.0,
         icon: 'lilypad',
         motion: ['water'],
-        cost: { PETAL: 10, GLOW_DUST: 5, HERB: 3 },
+        cost: { HERBS: 13, CRYSTAL: 5 },
         requirements: {
             structureLevel: 1,
             race: 'fairy'

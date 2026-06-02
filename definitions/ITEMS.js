@@ -36,9 +36,38 @@ export const ITEMS = {
     name: 'Leather',
     type: 'resource',
     rarity: 'common',
-    description: 'Tough hide used in crafting armor and goods'
+    description: 'Tough hide used in crafting armor and goods',
+    // Cured from hides of game found in open and wooded country.
+    biomes: ['plains', 'forest']
   },
-  
+  BONE: {
+    name: 'Bone',
+    type: 'resource',
+    rarity: 'common',
+    description: 'Sturdy bone used for crude weapons and tools',
+    biomes: ['desert', 'wastes', 'ruins']
+  },
+  COAL: {
+    name: 'Coal',
+    type: 'resource',
+    rarity: 'common',
+    description: 'Black rock that burns hot — fuel for forges',
+    biomes: ['mountains', 'wastes']
+  },
+  ROPE: {
+    name: 'Rope',
+    type: 'resource',
+    rarity: 'common',
+    description: 'Braided cordage for rigging, lashings and sails',
+    recipe: {
+      materials: { LEATHER: 2 },
+      ticksRequired: 4,
+      category: 'material',
+      requiredLevel: 1,
+      quantity: 2
+    }
+  },
+
   // Craftable items
   WOODEN_SWORD: {
     name: 'Wooden Sword',
@@ -80,13 +109,15 @@ export const ITEMS = {
     name: 'Herbs',
     type: 'resource',
     rarity: 'common',
-    description: 'Plants used for potions and healing'
+    description: 'Plants used for potions and healing',
+    biomes: ['plains', 'forest']
   },
   CRYSTAL: {
     name: 'Crystal',
     type: 'resource',
     rarity: 'uncommon',
-    description: 'Magical shard used for enchantments'
+    description: 'Magical shard used for enchantments',
+    biomes: ['mountains', 'oasis']
   },
   METAL: {
     name: 'Metal',
@@ -672,31 +703,54 @@ export function canCraftRecipe(recipeId, inventory, buildingLevels = {}) {
   return hasMaterials && meetsBuilding;
 }
 
+// The eight broad gather categories that the simple base resources are tagged
+// with. The world generates hundreds of specific biome names (temperate_forest,
+// grassland, volcanic_peak, …); this resolves any of them down to one category
+// so a tile always yields sensible loot instead of silently falling back to
+// plains. Order matters — wetter/more specific tests come first.
+export function getBiomeCategory(biomeName) {
+  const b = (biomeName || '').toLowerCase();
+  if (!b) return 'plains';
+  if (/swamp|marsh|bog|wetland|moor|mudflat|delta|fen/.test(b))                 return 'rivers';
+  if (/river|lake|stream|rivulet|shore|beach|shallow|estuary|water|sea|ocean|coast|littoral/.test(b)) return 'rivers';
+  if (/oasis/.test(b))                                                          return 'oasis';
+  if (/forest|wood|grove|jungle|rainforest|taiga|thicket/.test(b))              return 'forest';
+  if (/volcan|lava|magma|obsidian|scorch|caldera/.test(b))                      return 'mountains';
+  if (/mountain|peak|cliff|slope|alpine|highland|crag|snow|glacial|glacier|frost|ridge/.test(b)) return 'mountains';
+  if (/desert|dune|sand|arid|badlands|chalky|salt|dry_basin|mesa|dry_/.test(b)) return 'desert';
+  if (/ruin/.test(b))                                                           return 'ruins';
+  if (/waste|barren|scrub|steppe/.test(b))                                      return 'wastes';
+  if (/plain|grass|meadow|prairie|savanna|field|lowland|flats|heath/.test(b))   return 'plains';
+  return 'plains';
+}
+
+// An item is gatherable on a tile when its biome list names either the tile's
+// exact biome (specialised resources) or the tile's broad category (base
+// resources). Returns null when the item carries no biome tags.
+function itemMatchesBiome(item, biomeName, category) {
+  if (!Array.isArray(item.biomes) || item.biomes.length === 0) return false;
+  return item.biomes.includes(biomeName) || item.biomes.includes(category);
+}
+
 // Retain the biome item function
 export function getBiomeItems(biomeName) {
-  // Default to plains if biome not found
-  const validBiome = ['plains', 'forest', 'mountains', 'desert', 'rivers', 'oasis', 'ruins', 'wastes'].includes(biomeName) 
-    ? biomeName 
-    : 'plains';
-  
-  // Filter items that belong to this biome
-  const biomeItems = Object.entries(ITEMS)
-    .filter(([_, item]) => item.biomes && item.biomes.includes(validBiome))
+  const category = getBiomeCategory(biomeName);
+  return Object.entries(ITEMS)
+    .filter(([, item]) => itemMatchesBiome(item, biomeName, category))
     .map(([id, item]) => ({
       id,
       ...item,
       quantity: Math.floor(Math.random() * (item.rarity === 'common' ? 3 : 2)) + 1
     }));
-  
-  return biomeItems;
 }
 
 // Resources that can be gathered on a tile of the given biome — the deterministic
 // list (no random quantities), used to preview what an empty tile offers.
 export function getGatherableItems(biomeName) {
   if (!biomeName) return [];
+  const category = getBiomeCategory(biomeName);
   return Object.entries(ITEMS)
-    .filter(([, item]) => Array.isArray(item.biomes) && item.biomes.includes(biomeName))
+    .filter(([, item]) => itemMatchesBiome(item, biomeName, category))
     .map(([code, item]) => ({ code, name: item.name, rarity: item.rarity, type: item.type, food: !!item.food }));
 }
 

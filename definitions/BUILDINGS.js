@@ -78,7 +78,7 @@ export const BUILDINGS = {
       upgradeTimeMultiplier: 0.9,
       baseRequirements: [
         { code: 'WOOD', quantity: 10 },
-        { code: 'SEEDS', quantity: 5 }
+        { code: 'WHEAT', quantity: 5 }
       ]
     },
     
@@ -128,7 +128,7 @@ export const BUILDINGS = {
       baseRequirements: [
         { code: 'WOOD', quantity: 8 },
         { code: 'STONE', quantity: 4 },
-        { code: 'CRYSTAL_SHARD', quantity: 1 }
+        { code: 'CRYSTAL', quantity: 1 }
       ]
     }
   },
@@ -473,22 +473,22 @@ export const BUILDINGS = {
         break;
         
       case 'academy':
-        resources.push({ code: 'PAPER', quantity: Math.floor(3 * levelMultiplier) });
+        resources.push({ code: 'WOOD', quantity: Math.floor(3 * levelMultiplier) });
         if (currentLevel >= 2) {
-          resources.push({ code: 'CRYSTAL_SHARD', quantity: currentLevel - 1 });
+          resources.push({ code: 'CRYSTAL', quantity: currentLevel - 1 });
         }
         break;
         
       case 'market':
         // Extra wood for market stalls
         resources.push({ code: 'WOOD', quantity: Math.floor(5 * levelMultiplier) });
-        resources.push({ code: 'CLOTH', quantity: Math.floor(3 * levelMultiplier) });
+        resources.push({ code: 'LEATHER', quantity: Math.floor(3 * levelMultiplier) });
         break;
         
       case 'farm':
-        resources.push({ code: 'SEEDS', quantity: Math.floor(5 * levelMultiplier) });
+        resources.push({ code: 'WHEAT', quantity: Math.floor(5 * levelMultiplier) });
         if (currentLevel >= 2) {
-          resources.push({ code: 'WATER', quantity: Math.floor(2 * levelMultiplier) });
+          resources.push({ code: 'FRESH_WATER', quantity: Math.floor(2 * levelMultiplier) });
         }
         break;
         
@@ -497,7 +497,7 @@ export const BUILDINGS = {
         resources.push({ code: 'WOOD', quantity: Math.floor(8 * levelMultiplier) });
         resources.push({ code: 'ROPE', quantity: Math.floor(4 * levelMultiplier) });
         if (currentLevel >= 2) {
-          resources.push({ code: 'CANVAS', quantity: Math.floor(3 * levelMultiplier) });
+          resources.push({ code: 'LEATHER', quantity: Math.floor(3 * levelMultiplier) });
         }
         if (currentLevel >= 3) {
           resources.push({ code: 'METAL_ORE', quantity: Math.floor(5 * levelMultiplier) });
@@ -507,7 +507,7 @@ export const BUILDINGS = {
     
     // Higher level buildings need special resources
     if (currentLevel >= 4) {
-      resources.push({ code: 'CRYSTAL_SHARD', quantity: 1 });
+      resources.push({ code: 'CRYSTAL', quantity: 1 });
     }
     
     return resources;
