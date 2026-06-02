@@ -383,7 +383,7 @@ export const BUILDINGS = {
         {
           name: 'Advanced Shipyard',
           description: 'Allows construction of large ships and advanced vessels',
-          unlocks: ['large_boat', 'steamboat']
+          unlocks: ['large_boat']
         }
       ],
       4: [

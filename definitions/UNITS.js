@@ -548,31 +548,6 @@ const UNITS = {
         }
     },
     
-    'steamboat': {
-        name: 'Steamboat',
-        description: "Advanced vessel powered by steam engine",
-        category: 'player',
-        type: 'steamship',
-        power: 2.5,
-        capacity: 10,
-        speed: 1.5, // Faster than normal ships
-        timePerUnit: 3.0,
-        icon: 'steamship',
-        motion: ['water'],
-        cost: { WOOD: 20, METAL: 15, COAL: 10, GEAR: 5 },
-        requirements: {
-            structureLevel: 3,
-            buildingType: 'harbor',
-            buildingLevel: 3,
-            research: 'steam_power'
-        },
-        recruitment: {
-            sortOrder: 450,
-            tooltip: "Fast advanced vessel with good capacity",
-            unavailableText: "Requires level 3 harbor and steam power research"
-        }
-    },
-    
     'explorer_boat': {
         name: 'Explorer Vessel',
         description: "Specialized boat for charting unknown waters",
