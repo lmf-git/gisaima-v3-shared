@@ -143,9 +143,10 @@ export const ITEMS = {
     equipSlot: 'weapon',
     stats: { attack: 10 },
     recipe: {
+      // Forged from refined METAL (smelted from ore at a furnace), not raw ore.
       materials: {
         WOOD: 2,
-        METAL_ORE: 3
+        METAL: 2
       },
       ticksRequired: 18,
       category: 'weapon',
@@ -157,6 +158,84 @@ export const ITEMS = {
     }
   },
   
+  // ─── Steel tier (the payoff of an upgraded Furnace + Smithy) ───
+  STEEL: {
+    name: 'Steel',
+    type: 'resource',
+    rarity: 'uncommon',
+    description: 'Refined alloy, stronger than plain metal. Forged at an advanced furnace.',
+    recipe: {
+      materials: { METAL: 2 },
+      ticksRequired: 10,
+      category: 'material',
+      requiredLevel: 1,
+      requiredBuilding: { type: 'furnace', level: 3 },
+      quantity: 1
+    }
+  },
+  IRON_PICKAXE: {
+    name: 'Iron Pickaxe',
+    type: 'tool',
+    rarity: 'common',
+    description: 'A sturdy pickaxe that improves mining.',
+    stats: { miningYield: 0.1 },
+    recipe: {
+      materials: { METAL: 2, WOOD: 2 },
+      ticksRequired: 10,
+      category: 'tool',
+      requiredLevel: 2,
+      requiredBuilding: { type: 'smithy', level: 3 }
+    }
+  },
+  STEEL_SWORD: {
+    name: 'Steel Sword',
+    type: 'weapon',
+    rarity: 'rare',
+    description: 'A keen steel blade, far superior to iron.',
+    power: 16,
+    equipSlot: 'weapon',
+    stats: { attack: 16 },
+    recipe: {
+      materials: { STEEL: 2, WOOD: 2 },
+      ticksRequired: 24,
+      category: 'weapon',
+      requiredLevel: 4,
+      requiredBuilding: { type: 'smithy', level: 4 }
+    }
+  },
+  STEEL_ARMOR: {
+    name: 'Steel Armor',
+    type: 'armor',
+    rarity: 'rare',
+    description: 'A full suit of steel plate.',
+    power: 12,
+    equipSlot: 'torso',
+    stats: { defense: 12 },
+    recipe: {
+      materials: { STEEL: 4 },
+      ticksRequired: 28,
+      category: 'armor',
+      requiredLevel: 4,
+      requiredBuilding: { type: 'smithy', level: 4 }
+    }
+  },
+  LEGENDARY_WEAPON: {
+    name: 'Legendary Blade',
+    type: 'weapon',
+    rarity: 'legendary',
+    description: 'A masterwork weapon of mithril and crystal, forged at the height of a smithy.',
+    power: 28,
+    equipSlot: 'weapon',
+    stats: { attack: 28 },
+    recipe: {
+      materials: { MITHRIL_ORE: 3, STEEL: 3, CRYSTAL: 2 },
+      ticksRequired: 40,
+      category: 'weapon',
+      requiredLevel: 5,
+      requiredBuilding: { type: 'smithy', level: 5 }
+    }
+  },
+
   HERBAL_TEA: {
     name: 'Herbal Tea',
     type: 'consumable',
@@ -230,6 +309,36 @@ export const ITEMS = {
     type: 'resource',
     rarity: 'uncommon',
     description: 'Metal-bearing rock found in mountains',
+    biomes: ['mountains']
+  },
+  // Rare ores — the payoff of levelling a Mine (see BUILDINGS.benefits.mine).
+  // Found in mountain biomes; richer veins (mithril/adamantite) are scarce.
+  GOLD_ORE: {
+    name: 'Gold Ore',
+    type: 'resource',
+    rarity: 'uncommon',
+    description: 'Gold-veined rock. Smelts into currency-grade metal.',
+    biomes: ['mountains']
+  },
+  SILVER_ORE: {
+    name: 'Silver Ore',
+    type: 'resource',
+    rarity: 'uncommon',
+    description: 'Silver-bearing rock prized by smiths and traders.',
+    biomes: ['mountains']
+  },
+  MITHRIL_ORE: {
+    name: 'Mithril Ore',
+    type: 'resource',
+    rarity: 'rare',
+    description: 'A legendary light-yet-strong ore from the deepest veins.',
+    biomes: ['mountains']
+  },
+  ADAMANTITE: {
+    name: 'Adamantite',
+    type: 'resource',
+    rarity: 'epic',
+    description: 'The hardest known ore, workable only at a master forge.',
     biomes: ['mountains']
   },
   MOUNTAIN_CRYSTAL: {
@@ -573,12 +682,12 @@ export const ITEMS = {
     name: 'Iron Helmet',
     type: 'armor',
     rarity: 'uncommon',
-    description: 'A solid iron helmet forged at the smithy.',
+    description: 'A solid iron helmet forged at the smithy from refined metal.',
     power: 4,
     equipSlot: 'helmet',
     stats: { defense: 4 },
     recipe: {
-      materials: { METAL_ORE: 4, WOOD: 1 }, ticksRequired: 14, category: 'armor',
+      materials: { METAL: 2, WOOD: 1 }, ticksRequired: 14, category: 'armor',
       requiredLevel: 2, requiredBuilding: { type: 'smithy', level: 1 }
     }
   },
@@ -586,12 +695,12 @@ export const ITEMS = {
     name: 'Iron Body',
     type: 'armor',
     rarity: 'uncommon',
-    description: 'Full iron chest plate hammered from ore.',
+    description: 'Full iron chest plate hammered from refined metal.',
     power: 6,
     equipSlot: 'torso',
     stats: { defense: 6 },
     recipe: {
-      materials: { METAL_ORE: 8 }, ticksRequired: 20, category: 'armor',
+      materials: { METAL: 4 }, ticksRequired: 20, category: 'armor',
       requiredLevel: 3, requiredBuilding: { type: 'smithy', level: 2 }
     }
   },
@@ -599,12 +708,12 @@ export const ITEMS = {
     name: 'Iron Shield',
     type: 'armor',
     rarity: 'uncommon',
-    description: 'A heavy iron kite shield.',
+    description: 'A heavy iron kite shield forged from refined metal.',
     power: 7,
     equipSlot: 'shield',
     stats: { defense: 7 },
     recipe: {
-      materials: { METAL_ORE: 5 }, ticksRequired: 14, category: 'armor',
+      materials: { METAL: 3 }, ticksRequired: 14, category: 'armor',
       requiredLevel: 2, requiredBuilding: { type: 'smithy', level: 1 }
     }
   },

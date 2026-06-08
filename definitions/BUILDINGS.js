@@ -84,7 +84,7 @@ export const BUILDINGS = {
     
     // Add the new harbor building type
     harbour: {
-      name: "Harbor",
+      name: "Harbour",
       description: "A port facility for constructing and launching water vessels. Higher levels enable more advanced ships.",
       icon: "⚓",
       upgradeTimeMultiplier: 1.4,
@@ -186,21 +186,21 @@ export const BUILDINGS = {
         {
           name: 'Basic Training',
           description: 'Allows training of basic soldiers',
-          unlocks: ['recruit_soldier']
+          unlocks: ['human_warrior']
         }
       ],
       3: [
         {
           name: 'Advanced Training',
           description: 'Allows training of skilled units',
-          unlocks: ['skilled_soldier', 'archer']
+          unlocks: ['human_knight', 'elf_archer']
         }
       ],
       4: [
         {
           name: 'Elite Training',
           description: 'Allows training of elite units',
-          unlocks: ['elite_soldier', 'cavalry']
+          unlocks: ['elite_guard', 'cavalry']
         }
       ],
       5: [
@@ -258,16 +258,16 @@ export const BUILDINGS = {
       ],
       4: [
         {
-          name: 'Expert Research',
-          description: 'Allows researching expert technologies',
-          unlocks: ['expert_research']
+          name: 'Siegecraft',
+          description: 'Allows researching siege warfare',
+          unlocks: ['siegecraft']
         }
       ],
       5: [
         {
-          name: 'Magical Research',
-          description: 'Allows researching magical technologies',
-          unlocks: ['magical_research']
+          name: 'Grand Academy',
+          description: 'Research proceeds faster at the highest tier',
+          bonus: { researchSpeed: 0.2 }
         }
       ]
     },
@@ -283,7 +283,7 @@ export const BUILDINGS = {
         {
           name: 'Guard Posts',
           description: 'Allows posting guards for increased security',
-          unlocks: ['guard_post']
+          bonus: { defense: 0.15 }
         }
       ],
       4: [
@@ -298,7 +298,7 @@ export const BUILDINGS = {
           name: 'Impenetrable Defense',
           description: 'Provides maximum defensive capability',
           bonus: { defense: 0.3 },
-          unlocks: ['elite_guards']
+          unlocks: ['royal_guard']
         }
       ]
     },
@@ -313,8 +313,8 @@ export const BUILDINGS = {
       3: [
         {
           name: 'Exotic Goods',
-          description: 'Allows trading rare items',
-          unlocks: ['exotic_goods']
+          description: 'Better prices on rare items',
+          bonus: { tradeValue: 0.15 }
         }
       ],
       4: [
@@ -327,8 +327,8 @@ export const BUILDINGS = {
       5: [
         {
           name: 'Trade Empire',
-          description: 'Enables trading of the rarest items',
-          unlocks: ['legendary_trade_goods']
+          description: 'The finest prices in the realm',
+          bonus: { tradeValue: 0.3 }
         }
       ]
     },
@@ -343,8 +343,8 @@ export const BUILDINGS = {
       3: [
         {
           name: 'Special Crops',
-          description: 'Allows growing special crops',
-          unlocks: ['rare_herbs', 'magical_seeds']
+          description: 'Cultivate medicinal herbs alongside staples',
+          unlocks: ['medicinal_herbs']
         }
       ],
       4: [
@@ -356,18 +356,19 @@ export const BUILDINGS = {
       ],
       5: [
         {
-          name: 'Magical Farming',
-          description: 'Allows growing magical plants',
-          unlocks: ['dragon_fruit', 'golden_apple']
+          name: 'Bountiful Harvest',
+          description: 'The richest yields the land can give',
+          bonus: { farmingYield: 0.3 }
         }
       ]
     },
     
-    // Add benefits for the harbor building
-    harbor: {
+    // Add benefits for the harbour building (key must match the `types` key
+    // `harbour`, which is what gets stored when the building is placed).
+    harbour: {
       1: [
         {
-          name: 'Basic Harbor',
+          name: 'Basic Harbour',
           description: 'Allows construction of small boats and rafts',
           unlocks: ['small_boat']
         }
@@ -397,7 +398,7 @@ export const BUILDINGS = {
         {
           name: 'Master Shipyard',
           description: 'Enables construction of the most advanced vessels',
-          unlocks: ['flagship', 'trading_galleon'],
+          unlocks: ['explorer_boat'],
           bonus: { shipBuildingSpeed: 0.3, shipDurability: 0.3, navalCapacity: 0.5 }
         }
       ]
@@ -407,17 +408,17 @@ export const BUILDINGS = {
     monster_nest: {
       1: [{ name: 'Monster Shelter', description: 'Provides basic shelter for monsters', bonus: { monsterRegeneration: 0.1 } }],
       2: [{ name: 'Improved Nesting', description: 'Allows faster recovery', bonus: { monsterRegeneration: 0.2 } }],
-      3: [{ name: 'Advanced Nest', description: 'Attracts more monsters to the area', unlocks: ['monster_spawning'] }]
+      3: [{ name: 'Advanced Nest', description: 'Attracts more monsters to the area', bonus: { monsterRegeneration: 0.3 } }]
     },
     monster_forge: {
       1: [{ name: 'Basic Smithing', description: 'Allows crafting simple weapons', unlocks: ['crude_weapon'] }],
       2: [{ name: 'Improved Forge', description: 'Better weapon crafting', bonus: { attackPower: 0.1 } }],
-      3: [{ name: 'Monster Arsenal', description: 'Creates better monster weapons', unlocks: ['monster_weapons'] }]
+      3: [{ name: 'Monster Arsenal', description: 'Creates better monster weapons', bonus: { attackPower: 0.2 } }]
     },
     monster_totem: {
       1: [{ name: 'Ritual Site', description: 'Empowers nearby monsters', bonus: { monsterPower: 0.1 } }],
       2: [{ name: 'Power Totem', description: 'Further empowers monsters', bonus: { monsterPower: 0.2 } }],
-      3: [{ name: 'Elder Totem', description: 'Allows commanding other monster groups', unlocks: ['monster_command'] }]
+      3: [{ name: 'Elder Totem', description: 'A potent seat of monster power', bonus: { monsterPower: 0.3 } }]
     }
   },
   
@@ -492,8 +493,8 @@ export const BUILDINGS = {
         }
         break;
         
-      case 'harbor':
-        // Extra wood and rope for harbor construction
+      case 'harbour':
+        // Extra wood and rope for harbour construction
         resources.push({ code: 'WOOD', quantity: Math.floor(8 * levelMultiplier) });
         resources.push({ code: 'ROPE', quantity: Math.floor(4 * levelMultiplier) });
         if (currentLevel >= 2) {
@@ -538,6 +539,37 @@ export const BUILDINGS = {
   
   getNewBenefitsForLevel(buildingType, toLevel) {
     return this.getBenefitsForLevel(buildingType, toLevel);
+  },
+
+  /**
+   * Sum every numeric `bonus` a building grants from level 1 up to `level`.
+   * e.g. a mine at level 4 → { miningYield: 0.3 } (0.1 at L2 + 0.2 at L4).
+   * Used server-side to scale production/crafting by actual building level
+   * instead of a hardcoded table.
+   * @param {string} buildingType
+   * @param {number} level
+   * @returns {Record<string, number>}
+   */
+  getCumulativeBonuses(buildingType, level) {
+    const out = {};
+    const byLevel = this.benefits[buildingType];
+    if (!byLevel) return out;
+    const lvl = Math.max(1, Number(level) || 1);
+    for (let l = 1; l <= lvl; l++) {
+      for (const benefit of byLevel[l] || []) {
+        const bonus = benefit?.bonus;
+        if (!bonus) continue;
+        for (const [k, v] of Object.entries(bonus)) {
+          if (typeof v === 'number') out[k] = (out[k] || 0) + v;
+        }
+      }
+    }
+    return out;
+  },
+
+  /** Convenience: the cumulative value of a single bonus key (0 if none). */
+  getBonusValue(buildingType, level, bonusKey) {
+    return this.getCumulativeBonuses(buildingType, level)[bonusKey] || 0;
   },
   
   getBuildingIcon(type) {

@@ -284,6 +284,46 @@ export class Units {
   }
   
   /**
+   * Check whether a structure satisfies a unit's recruitment requirements.
+   * Single source of truth for both the client (availability display) and the
+   * server (authoritative enforcement in recruitUnits). Covers structure level,
+   * structure type, race, building type/level and research gates.
+   * @param {object} structure - The recruiting structure.
+   * @param {string} unitId - The unit definition id.
+   * @returns {{ ok: boolean, reason: string }}
+   */
+  static checkRecruitRequirements(structure, unitId) {
+    const unit = UNITS[unitId];
+    if (!unit) return { ok: false, reason: `Unknown unit: ${unitId}` };
+    const reqs = unit.requirements || {};
+
+    const structureLevel = structure?.level || 1;
+    const buildings = structure?.buildings || {};
+    const race = structure?.race?.toLowerCase();
+
+    if (reqs.structureLevel && structureLevel < reqs.structureLevel) {
+      return { ok: false, reason: `Requires structure level ${reqs.structureLevel}` };
+    }
+    if (reqs.race && reqs.race !== race) {
+      return { ok: false, reason: `Requires ${Units.capitalizeFirstLetter(reqs.race)} structure` };
+    }
+    if (reqs.structureType && !reqs.structureType.includes(structure?.type)) {
+      return { ok: false, reason: `Requires ${Units.formatStructureTypeName(reqs.structureType[0])}` };
+    }
+    if (reqs.buildingType) {
+      const have = buildings[reqs.buildingType];
+      const needLevel = reqs.buildingLevel || 1;
+      if (!have || (have.level || 1) < needLevel) {
+        return { ok: false, reason: `Requires ${Units.formatStructureTypeName(reqs.buildingType)} level ${needLevel}` };
+      }
+    }
+    if (reqs.research && !(structure?.research && structure.research[reqs.research])) {
+      return { ok: false, reason: `Requires ${Units.formatResearchName(reqs.research)} research` };
+    }
+    return { ok: true, reason: '' };
+  }
+
+  /**
    * Format structure type name for display
    * @param {string} type - Structure type
    * @returns {string} Formatted name

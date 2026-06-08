@@ -252,7 +252,89 @@ export const STRUCTURES = {
         icon: '📦'
       }
     ]
+  },
+
+  // ─── Tiered defensive line ───
+  // A `shelter` is promoted up this ladder as it is upgraded (see
+  // STRUCTURE_TIER_LADDER): fortress (L2) → stronghold (L3) → citadel (L4+).
+  // These types are referenced by unit requirements and upgrade cost tables; the
+  // promotion on upgrade is what brings them into being.
+  'fortress': {
+    name: 'Fortress',
+    description: 'A fortified stronghold-in-the-making with stout walls and a garrison.',
+    type: 'fortress',
+    durability: 350,
+    sightRange: 3,
+    capacity: 14,
+    bonuses: { defense: 5, detection: 1 },
+    requiredResources: [
+      { id: 'WOOD', quantity: 20 },
+      { id: 'STONE', quantity: 18 },
+      { id: 'METAL_ORE', quantity: 6 }
+    ],
+    buildTime: 6,
+    features: [
+      { name: 'Garrison', description: 'Houses a standing defensive force', icon: '🛡️' },
+      { name: 'Curtain Wall', description: 'Stone walls that blunt attackers', icon: '🏰' }
+    ]
+  },
+  'stronghold': {
+    name: 'Stronghold',
+    description: 'A formidable seat of power, able to train advanced units.',
+    type: 'stronghold',
+    durability: 550,
+    sightRange: 4,
+    capacity: 20,
+    bonuses: { defense: 8, detection: 2 },
+    requiredResources: [
+      { id: 'WOOD', quantity: 30 },
+      { id: 'STONE', quantity: 30 },
+      { id: 'METAL_ORE', quantity: 12 }
+    ],
+    buildTime: 8,
+    features: [
+      { name: 'War Council', description: 'Coordinates advanced military units', icon: '⚔️' },
+      { name: 'Reinforced Keep', description: 'Heavily fortified inner keep', icon: '🏰' }
+    ]
+  },
+  'citadel': {
+    name: 'Citadel',
+    description: 'The pinnacle of fortification — a bastion of the realm.',
+    type: 'citadel',
+    durability: 800,
+    sightRange: 5,
+    capacity: 30,
+    bonuses: { defense: 12, detection: 3 },
+    requiredResources: [
+      { id: 'WOOD', quantity: 40 },
+      { id: 'STONE', quantity: 45 },
+      { id: 'METAL_ORE', quantity: 20 },
+      { id: 'CRYSTAL', quantity: 5 }
+    ],
+    buildTime: 10,
+    features: [
+      { name: 'Grand Bastion', description: 'Commands the surrounding region', icon: '🏯' },
+      { name: 'Legendary Forge', description: 'Crafts the finest equipment', icon: '🌟' }
+    ]
   }
 };
 
 export const STRUCTURE_TYPES = Object.keys(STRUCTURES);
+
+// Ordered promotion ladder for player defensive bases. A structure whose type is
+// on this ladder is promoted to the entry matching its new level when upgraded
+// (index 0 = level 1). Types not on the ladder (spawn, outpost, watchtower…)
+// keep their type and only gain levels.
+export const STRUCTURE_TIER_LADDER = ['shelter', 'fortress', 'stronghold', 'citadel'];
+
+/**
+ * The type a structure should become at `toLevel`, or null if it should not
+ * change (not on the ladder, or already the right tier).
+ */
+export function promotedStructureType(currentType, toLevel) {
+  const idx = STRUCTURE_TIER_LADDER.indexOf(currentType);
+  if (idx === -1) return null;
+  const targetIdx = Math.min(Math.max(1, Number(toLevel) || 1) - 1, STRUCTURE_TIER_LADDER.length - 1);
+  const target = STRUCTURE_TIER_LADDER[targetIdx];
+  return target && target !== currentType ? target : null;
+}

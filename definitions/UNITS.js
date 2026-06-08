@@ -431,6 +431,76 @@ const UNITS = {
         }
     },
 
+    // ─── Barracks-tier units (the payoff of an upgraded Barracks; see
+    // BUILDINGS.benefits.barracks). Race-agnostic so any structure with a
+    // sufficient barracks can field them. ───
+    'cavalry': {
+        name: 'Cavalry',
+        description: "Fast mounted shock troops that hit hard on the charge.",
+        category: 'player',
+        type: 'cavalry',
+        meleeAttack: 3.0, rangedAttack: 0, magicAttack: 0,
+        meleeDefense: 4, rangedDefense: 2, magicDefense: 1,
+        carryCapacity: 4,
+        timePerUnit: 2,
+        icon: 'sword',
+        cost: { WOOD: 2, METAL: 2, LEATHER: 2 },
+        requirements: {
+            structureLevel: 3,
+            buildingType: 'barracks',
+            buildingLevel: 4
+        },
+        recruitment: {
+            sortOrder: 320,
+            tooltip: "Powerful mounted unit, requires a level 4 barracks",
+            unavailableText: "Requires a level 4 barracks"
+        }
+    },
+    'champion': {
+        name: 'Champion',
+        description: "A peerless warrior worth a dozen common soldiers.",
+        category: 'player',
+        type: 'champion',
+        meleeAttack: 5.0, rangedAttack: 0, magicAttack: 0,
+        meleeDefense: 6, rangedDefense: 4, magicDefense: 3,
+        carryCapacity: 4,
+        timePerUnit: 3,
+        icon: 'sword',
+        cost: { METAL: 3, STEEL: 1 },
+        requirements: {
+            structureLevel: 4,
+            buildingType: 'barracks',
+            buildingLevel: 5
+        },
+        recruitment: {
+            sortOrder: 400,
+            tooltip: "Elite champion, requires a level 5 barracks",
+            unavailableText: "Requires a level 5 barracks"
+        }
+    },
+    'royal_guard': {
+        name: 'Royal Guard',
+        description: "Disciplined elite guard, the backbone of a realm's defence.",
+        category: 'player',
+        type: 'guard',
+        meleeAttack: 3.5, rangedAttack: 0, magicAttack: 0,
+        meleeDefense: 8, rangedDefense: 6, magicDefense: 3,
+        carryCapacity: 3,
+        timePerUnit: 3,
+        icon: 'shield',
+        cost: { METAL: 2, STEEL: 2 },
+        requirements: {
+            structureLevel: 4,
+            buildingType: 'barracks',
+            buildingLevel: 5
+        },
+        recruitment: {
+            sortOrder: 410,
+            tooltip: "Elite guard, requires a level 5 barracks",
+            unavailableText: "Requires a level 5 barracks"
+        }
+    },
+
     // New unit with resource building requirement
     'resource_gatherer': {
         name: 'Expert Gatherer',
@@ -490,7 +560,7 @@ const UNITS = {
         cost: { WOOD: 15, LEATHER: 5, ROPE: 3 },
         requirements: {
             structureLevel: 2,
-            buildingType: 'harbor',
+            buildingType: 'harbour',
             buildingLevel: 1
         },
         recruitment: {
@@ -513,7 +583,7 @@ const UNITS = {
         cost: { WOOD: 25, METAL_ORE: 10, ROPE: 8, LEATHER: 5 },
         requirements: {
             structureLevel: 3,
-            buildingType: 'harbor',
+            buildingType: 'harbour',
             buildingLevel: 2
         },
         recruitment: {
@@ -536,7 +606,7 @@ const UNITS = {
         cost: { WOOD: 15, METAL_ORE: 8, BONE: 5 },
         requirements: {
             structureLevel: 2,
-            buildingType: 'harbor',
+            buildingType: 'harbour',
             buildingLevel: 1,
             buildingType2: 'barracks',
             buildingLevel2: 2
@@ -562,7 +632,7 @@ const UNITS = {
         cost: { WOOD: 18, ROPE: 6, CRYSTAL: 1 },
         requirements: {
             structureLevel: 2,
-            buildingType: 'harbor',
+            buildingType: 'harbour',
             buildingLevel: 1,
             buildingType2: 'observatory',
             buildingLevel2: 1
@@ -591,7 +661,7 @@ const UNITS = {
         requirements: {
             structureLevel: 2,
             race: 'elf',
-            buildingType: 'harbor'
+            buildingType: 'harbour'
         },
         recruitment: {
             sortOrder: 460,
@@ -615,7 +685,7 @@ const UNITS = {
         requirements: {
             structureLevel: 2,
             race: 'dwarf',
-            buildingType: 'harbor',
+            buildingType: 'harbour',
             buildingLevel: 2
         },
         recruitment: {
