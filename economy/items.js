@@ -1,4 +1,5 @@
 import UNITS from '../definitions/UNITS.js';
+import { geneticMod } from '../lives/genetics.js';
 
 /**
  * Merges two collections of items, combining quantities of identical items based on their item codes
@@ -61,11 +62,15 @@ export function itemCount(items) {
   );
 }
 
-// A group's carrying capacity = the sum of its units' carryCapacity.
+// A group's carrying capacity = the sum of its units' carryCapacity, plus any
+// genetic carry bonus a player unit's ethnicity/trait grants. This is the single
+// source of truth for both the UI display and the server gather loop, so "gather
+// until full" always stops exactly at the shown capacity.
 export function groupCarryCapacity(group) {
   if (!group?.units) return 0;
   const units = Array.isArray(group.units) ? group.units : Object.values(group.units);
-  return units.reduce((sum, u) => sum + (UNITS[u?.type]?.carryCapacity || 0), 0);
+  return units.reduce((sum, u) =>
+    sum + (UNITS[u?.type]?.carryCapacity || 0) + (u?.type === 'player' ? geneticMod(u, 'carry') : 0), 0);
 }
 
 // Split an item store against a carry capacity. The first `capacity` units are
