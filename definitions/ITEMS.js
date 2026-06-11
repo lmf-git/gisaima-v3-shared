@@ -869,6 +869,64 @@ export function getItemPower(itemId) {
   return item && item.power ? item.power : 0;
 }
 
+const _num = (v) => (typeof v === 'number' && isFinite(v) ? v : 0);
+
+// Infer a weapon's damage school ('melee' | 'ranged' | 'magic') from an explicit
+// `attackType` field, otherwise from its code/name/type. Defaults to melee.
+export function getItemCombatType(itemId) {
+  const item = typeof itemId === 'string' ? ITEMS[itemId] : itemId;
+  if (!item) return 'melee';
+  if (item.attackType) return item.attackType;
+  const hay = `${typeof itemId === 'string' ? itemId : ''} ${item.name || ''} ${item.type || ''}`.toLowerCase();
+  if (/bow|crossbow|sling|arrow|dart|javelin|throw/.test(hay)) return 'ranged';
+  if (/staff|wand|tome|orb|rod|scepter|sceptre|grimoire|spell|rune|stave|focus/.test(hay)) return 'magic';
+  return 'melee';
+}
+
+/**
+ * Typed combat contribution of a single equipped item, split across the three
+ * schools of attack and defence. Resolution order:
+ *   - explicit per-school stats (meleeAttack/rangedAttack/magicAttack,
+ *     meleeDefense/rangedDefense/magicDefense) always stack;
+ *   - a generic `stats.attack` (or, for a weapon lacking it, its `power`) is
+ *     assigned to the weapon's inferred damage school;
+ *   - a generic `stats.defense` protects against ALL schools (armour shields
+ *     the wearer from every kind of blow).
+ * Returns { meleeAtk, rangedAtk, magicAtk, meleeDef, rangedDef, magicDef }.
+ */
+export function getItemCombatContribution(itemId) {
+  const out = { meleeAtk: 0, rangedAtk: 0, magicAtk: 0, meleeDef: 0, rangedDef: 0, magicDef: 0 };
+  const item = typeof itemId === 'string' ? ITEMS[itemId] : itemId;
+  if (!item) return out;
+  const s = item.stats || {};
+
+  // Attack — explicit typed stats first.
+  out.meleeAtk  += _num(s.meleeAttack);
+  out.rangedAtk += _num(s.rangedAttack);
+  out.magicAtk  += _num(s.magicAttack);
+  // Generic attack, or a weapon's raw power when it has no explicit attack stat.
+  const genericAtk = _num(s.attack) || (item.equipSlot === 'weapon' && !s.attack ? _num(item.power) : 0);
+  if (genericAtk) {
+    const t = getItemCombatType(itemId);
+    if (t === 'ranged') out.rangedAtk += genericAtk;
+    else if (t === 'magic') out.magicAtk += genericAtk;
+    else out.meleeAtk += genericAtk;
+  }
+
+  // Defence — explicit typed stats first, then generic defence vs all schools.
+  out.meleeDef  += _num(s.meleeDefense);
+  out.rangedDef += _num(s.rangedDefense);
+  out.magicDef  += _num(s.magicDefense);
+  const genericDef = _num(s.defense);
+  if (genericDef) {
+    out.meleeDef  += genericDef;
+    out.rangedDef += genericDef;
+    out.magicDef  += genericDef;
+  }
+
+  return out;
+}
+
 // ---------------------------------------------------------------------------
 // Food / nourishment
 // ---------------------------------------------------------------------------

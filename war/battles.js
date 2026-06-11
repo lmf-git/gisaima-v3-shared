@@ -1,5 +1,5 @@
 import UNITS from "../definitions/UNITS.js";
-import { getItemPower } from "../definitions/ITEMS.js";
+import { getItemPower, getItemCombatContribution } from "../definitions/ITEMS.js";
 
 /**
  * Critical Hit System Documentation
@@ -67,10 +67,18 @@ export function calculateGroupCombatStats(group) {
     totals.rangedDef += (unitDef.rangedDefense || 1) * sf;
     totals.magicDef  += (unitDef.magicDefense  || 1) * sf;
 
-    // Unit's equipped items contribute to attack
+    // Unit's equipped items contribute typed attack AND defence — a bow adds
+    // ranged attack, a staff magic attack, armour defends every school, etc.
     if (unit.equipment) {
       for (const itemCode of Object.values(unit.equipment)) {
-        if (itemCode) totals.meleeAtk += getItemPower(itemCode);
+        if (!itemCode) continue;
+        const c = getItemCombatContribution(itemCode);
+        totals.meleeAtk  += c.meleeAtk;
+        totals.rangedAtk += c.rangedAtk;
+        totals.magicAtk  += c.magicAtk;
+        totals.meleeDef  += c.meleeDef;
+        totals.rangedDef += c.rangedDef;
+        totals.magicDef  += c.magicDef;
       }
     }
 
