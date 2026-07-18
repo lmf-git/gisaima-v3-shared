@@ -308,8 +308,8 @@ export const ITEMS = {
     name: 'Metal Ore',
     type: 'resource',
     rarity: 'uncommon',
-    description: 'Metal-bearing rock found in mountains',
-    biomes: ['mountains']
+    description: 'Metal-bearing rock, richest in mountains but also scraped from wastes and ruins',
+    biomes: ['mountains', 'wastes', 'ruins']
   },
   // Rare ores — the payoff of levelling a Mine (see BUILDINGS.benefits.mine).
   // Found in mountain biomes; richer veins (mithril/adamantite) are scarce.

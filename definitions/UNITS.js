@@ -21,7 +21,9 @@ const UNITS = {
         carryCapacity: 5,
         timePerUnit: 1.1,
         icon: 'sword',
-        cost: { WOOD: 2, METAL_ORE: 1 },
+        // Starter warrior: WOOD + STONE only (both gather in every biome) so a
+        // plains/forest start isn't gated behind a trek to mountain-ore biomes.
+        cost: { WOOD: 2, STONE: 1 },
         recruitment: {
         sortOrder: 11,
         tooltip: "Sturdy and disciplined"
